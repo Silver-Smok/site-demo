@@ -25,25 +25,39 @@
 		<article class=" flex w-5/6 items-center justify-evenly flex-wrap">
 			<div class="flex flex-col gap-20 md:w-3/6">
 				<div class="flex flex-col gap-5">
-					<h2 class="text-2xl self-center">Notre Mission</h2>
-					<h3 class="text-3xl self-center text-center">Redéfinir la façon dont nous travaillons</h3>
+					<!-- <h2 class="text-2xl self-center">Notre Mission</h2> -->
+					<h3 class="text-3xl self-center">
+						Une Solution Logicielle Innovante pour Entreprises Modernes
+					</h3>
 				</div>
-				<div class=" flex flex-col gap-10">
+				<div class=" flex flex-col gap-5">
 					<p>
-						Dans un pays qui a vu naître les plus grandes références du luxe, croître les marques
-						les plus raffinées, se développer les enseignes les plus créatives, comment imaginer que
-						nous ne saurions accompagner l’innovation et la compétence au service de nos exigences ?
+						Silver Stock est une entreprise innovante et en pleine croissance, spécialisée dans la
+						création de solutions logicielles pour les entreprises. Fondée en 2014, nous avons
+						travaillé dur pour développer notre produit phare, qui est maintenant commercialisé
+						depuis plus d'un an.
 					</p>
-					C’est pourquoi j’ai décidé, avec Silver Stock, d’aller au-devant des attentes des fumeurs et
-					des vapoteurs, en étant proactif : en proposant des vrais services, en vous proposant un accompagnement
-					personnalisé dans une relation de confiance sincère.
 					<p>
-						J’ai voulu, à travers notre histoire et nos investissements, à travers notre ancrage
-						bleu blanc rouge, apporter à la cigarette électronique toutes ses lettres de noblesse.
+						Notre équipe est composée de professionnels talentueux et passionnés, qui travaillent
+						ensemble pour fournir des solutions de qualité supérieure à nos clients. Nous sommes
+						fiers de notre culture d'entreprise dynamique et soudée, qui encourage la collaboration,
+						l'innovation et la créativité.
 					</p>
-					<p>SilverStock a créé d'infinies possibilités que nous n'avions pas avant.</p>
-
-					<p>Mossadegh AFRIT - Président Directeur Général</p>
+					<p>
+						Chez Silver Stock, nous croyons que notre succès dépend de la réussite de nos clients.
+						C'est pourquoi nous nous engageons à fournir des solutions logicielles sur mesure, qui
+						répondent aux besoins spécifiques de chaque entreprise. Nous travaillons en étroite
+						collaboration avec nos clients pour comprendre leurs défis et leurs objectifs, et nous
+						nous efforçons de dépasser leurs attentes à chaque étape du processus.
+					</p>
+					<p>
+						Notre histoire a commencé il y a quelques années, lorsque notre fondateur a identifié un
+						besoin sur le marché pour une solution logicielle innovante. Il a réuni une équipe de
+						professionnels talentueux et passionnés, et ensemble, ils ont travaillé dur pour
+						développer notre produit phare. Aujourd'hui, nous sommes fiers de notre succès et nous
+						sommes déterminés à continuer à innover et à fournir des solutions logicielles de
+						qualité supérieure à nos clients.
+					</p>
 				</div>
 			</div>
 			<div class="py-5">
