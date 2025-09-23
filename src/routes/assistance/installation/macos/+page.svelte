@@ -11,8 +11,8 @@
 		{pdf}
 		title="Installation MacOS"
 		texte="Pour installer le logiciel sur votre ordinateur, suivez les étapes suivantes."
-		downloadLink="https://github.com/Silver-Smok/silverstock-electron-app/releases/download/v1.0.18/SilverStock.dmg"
-		dl2="https://github.com/Silver-Smok/silverstock-electron-app/releases/download/v1.0.18/SilverStock-darwin-x64-1.0.18.zip"
+		downloadLink="https://github.com/Silver-Smok/silverstock-electron-app/releases/download/v1.0.21/SilverStock.dmg"
+		dl2="https://github.com/Silver-Smok/silverstock-electron-app/releases/download/v1.0.21/SilverStock-darwin-x64-1.0.21.zip"
 		textDl1="Pour macOS version 13 ou supérieure"
 		textDl2="Pour macOS version 12 ou inférieure"
 	/>
