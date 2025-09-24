@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { superValidate } from 'sveltekit-superforms/server';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
 import Mailgun from 'mailgun.js';
 import formData from 'form-data';
@@ -35,7 +36,7 @@ const newContactSchema = z.object({
 });
 
 export const load = async () => {
-	const form = await superValidate(newContactSchema);
+	const form = await superValidate(zod(newContactSchema));
 	return {
 		form
 	};
@@ -43,7 +44,7 @@ export const load = async () => {
 
 export const actions = {
 	default: async (event) => {
-		const form = await superValidate(event, newContactSchema);
+		const form = await superValidate(event, zod(newContactSchema));
 		const messageData = {
 			from: form.data.email,
 			to: 'contact@silver-stock.fr',

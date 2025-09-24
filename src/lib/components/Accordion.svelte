@@ -31,7 +31,12 @@
 				<Accordion class="mr-5 min-w-200 ">
 					{#each sectionsTabAccordion as section, index}
 						{#if index === 0}
-							<div on:click={() => updateSelectedImage(index)} on:keydown>
+							<div 
+								role="button" 
+								tabindex="0"
+								on:click={() => updateSelectedImage(index)} 
+								on:keydown={(e) => e.key === 'Enter' || e.key === ' ' ? updateSelectedImage(index) : null}
+							>
 								<AccordionItem>
 									<span slot="header">{section.title}</span>
 									<p class="mb-2 text-gray-500 dark:text-gray-400">
@@ -40,7 +45,12 @@
 								</AccordionItem>
 							</div>
 						{:else}
-							<div on:click={() => updateSelectedImage(index)} on:keydown>
+							<div 
+								role="button" 
+								tabindex="0"
+								on:click={() => updateSelectedImage(index)} 
+								on:keydown={(e) => e.key === 'Enter' || e.key === ' ' ? updateSelectedImage(index) : null}
+							>
 								<AccordionItem class="!rounded-none ">
 									<span slot="header">{section.title}</span>
 
