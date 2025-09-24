@@ -1,5 +1,5 @@
 <script>
-	import { superForm } from 'sveltekit-superforms/client';
+	import { superForm } from 'sveltekit-superforms';
 	import { Button, Modal } from 'flowbite-svelte';
 	let defaultModal = false;
 	export let data;
