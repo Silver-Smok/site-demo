@@ -9,7 +9,7 @@
 
 <section class="bg-image">
 	<div class="layer overflow-hidden h-90vh grid-row-2 grid">
-		<div class=" " />
+		<div class=" "></div>
 		<div class="p-8 flex items-center">
 			<div class="mx-auto max-w-xl text-center sm:text-left flex flex-col gap-5">
 				<div class="flex items-center justify-center gap-3 md:justify-start">

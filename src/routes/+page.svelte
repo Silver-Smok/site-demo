@@ -73,16 +73,21 @@
 	};
 </script>
 
+<svelte:head>
+	<title>SilverStock - Solution de gestion pour commerces</title>
+	<meta name="description" content="SilverStock est une application de gestion complète pour votre commerce : caisse enregistreuse en ligne, gestion des stocks, statistiques en temps réel et bien plus." />
+</svelte:head>
+
 <div class="dark:text-white dark:bg-gray-900">
 	<HomeBanners />
 	<SectionImgRight />
 	<SVGdivider />
 	<ThreeIcons header={header3icons} iconsTab={tabIcons} />
-	<div id="stock" />
+	<div id="stock"></div>
 	<Cta tabCTA={ctaStocks} buttonAttributs={buttonCta} />
-	<div id="info" />
+	<div id="info"></div>
 	<LeftCta />
-	<div id="ventes" />
+	<div id="ventes"></div>
 	<Cta tabCTA={ctaVentes} buttonAttributs={buttonCta} />
 	<TextBanner />
 	<ArticleTwo obj={communication} buttonAttributs={buttonCom} />

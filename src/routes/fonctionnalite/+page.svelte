@@ -229,6 +229,11 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Fonctionnalités - SilverStock</title>
+	<meta name="description" content="Découvrez toutes les fonctionnalités de SilverStock : statistiques, gestion des stocks, management d'équipes, gestion produits et clients, sécurité." />
+</svelte:head>
+
 <main class="dark:bg-gray-900 dark:text-white text-black">
 	<!-- HomeBanner -->
 

@@ -15,6 +15,11 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Notre Histoire - SilverStock</title>
+	<meta name="description" content="Découvrez l'histoire de SilverStock, une solution logicielle innovante développée depuis 2015 pour moderniser la gestion d'entreprise." />
+</svelte:head>
+
 <header class="dark:bg-gray-900 dark:text-white shadow-lg dark:shadow-white">
 	<div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
 		<h1 class="text-3xl font-bold py-5">Notre histoire - SilverStock</h1>
@@ -85,9 +90,9 @@
 						</h1>
 
 						<div class="mt-2">
-							<span class="inline-block w-40 h-1 rounded-full bg-blue-500" />
-							<span class="inline-block w-3 h-1 ml-1 rounded-full bg-blue-500" />
-							<span class="inline-block w-1 h-1 ml-1 rounded-full bg-blue-500" />
+							<span class="inline-block w-40 h-1 rounded-full bg-blue-500"></span>
+							<span class="inline-block w-3 h-1 ml-1 rounded-full bg-blue-500"></span>
+							<span class="inline-block w-1 h-1 ml-1 rounded-full bg-blue-500"></span>
 						</div>
 					</div>
 

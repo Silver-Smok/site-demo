@@ -13,6 +13,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Contact - SilverStock</title>
+	<meta name="description" content="Contactez-nous pour une démonstration personnalisée de SilverStock et découvrez comment notre solution peut transformer votre entreprise." />
+</svelte:head>
+
 <section class="dark:bg-gray-900 py-20 lg:py-[120px] overflow-hidden relative z-10 min-h-screen">
 	<div class="container">
 		<div class="flex flex-wrap lg:justify-between -mx-4">
@@ -63,7 +68,7 @@
 								<div class="text-red-500 text-sm mb-4">{$errors.name[0]}</div>
 							{/if}
 						</div>
-						<small />
+						<small></small>
 						<div class="mb-6">
 							<input
 								name="email"
@@ -131,7 +136,7 @@
                         focus-visible:shadow-none
                         focus:border-primary
                         "
-							/>
+							></textarea>
 							{#if $errors.message}
 								<div class="text-red-500 text-sm mb-4">{$errors.message}</div>
 							{/if}
