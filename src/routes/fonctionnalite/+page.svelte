@@ -316,7 +316,7 @@
 <style>
 	.bg-image {
 		/* background-image: url('/ordiApp.png'); */
-		background-image: url('/fonctionalite-banner.png');
+		background-image: url('/fonctionalite-banner.jpg');
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;
