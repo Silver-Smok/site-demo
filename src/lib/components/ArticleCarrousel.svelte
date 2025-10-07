@@ -9,21 +9,21 @@
 		if (isTransitioning) return;
 		isTransitioning = true;
 		currentIndex = (currentIndex + 1) % images.length;
-		setTimeout(() => isTransitioning = false, 300);
+		setTimeout(() => (isTransitioning = false), 300);
 	}
 
 	function prevSlide() {
 		if (isTransitioning) return;
 		isTransitioning = true;
 		currentIndex = (currentIndex - 1 + images.length) % images.length;
-		setTimeout(() => isTransitioning = false, 300);
+		setTimeout(() => (isTransitioning = false), 300);
 	}
 
 	function goToSlide(index) {
 		if (isTransitioning || index === currentIndex) return;
 		isTransitioning = true;
 		currentIndex = index;
-		setTimeout(() => isTransitioning = false, 300);
+		setTimeout(() => (isTransitioning = false), 300);
 	}
 </script>
 
@@ -32,14 +32,18 @@
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 			<!-- Carousel -->
 			<div class="relative z-10 flex items-center justify-center">
-				<div class="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 shadow-2xl">
+				<div
+					class="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden rounded-xl bg-[#F5F7FB] shadow-2xl"
+				>
 					<!-- Images -->
 					{#each images as image, i}
 						<div
-							class="absolute inset-0 transition-all duration-300 ease-in-out {currentIndex === i ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}"
+							class="absolute inset-0 transition-all duration-300 ease-in-out {currentIndex === i
+								? 'opacity-100 translate-x-0'
+								: 'opacity-0 translate-x-full'}"
 						>
-							<img 
-								src={image.imgurl} 
+							<img
+								src={image.imgurl}
 								alt={image.name}
 								class="w-full h-full object-contain"
 								loading="lazy"
@@ -51,19 +55,19 @@
 					<button
 						type="button"
 						onclick={prevSlide}
-						class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
+						class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
 						aria-label="Image précédente"
 					>
-						<IconChevronLeft class="w-6 h-6 text-gray-800 dark:text-white" />
+						<IconChevronLeft class="w-6 h-6 text-white" />
 					</button>
 
 					<button
 						type="button"
 						onclick={nextSlide}
-						class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
+						class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
 						aria-label="Image suivante"
 					>
-						<IconChevronRight class="w-6 h-6 text-gray-800 dark:text-white" />
+						<IconChevronRight class="w-6 h-6 text-white" />
 					</button>
 
 					<!-- Indicateurs -->
@@ -72,8 +76,8 @@
 							<button
 								type="button"
 								onclick={() => goToSlide(i)}
-								class="w-3 h-3 rounded-full transition-all duration-200 {currentIndex === i 
-									? 'bg-blue-600 dark:bg-blue-500 w-8' 
+								class="w-3 h-3 rounded-full transition-all duration-200 {currentIndex === i
+									? 'bg-blue-600 dark:bg-blue-500 w-8'
 									: 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'}"
 								aria-label="Aller à l'image {i + 1}"
 							></button>
@@ -82,7 +86,9 @@
 
 					<!-- Légende -->
 					<div class="absolute bottom-12 left-0 right-0 z-20 text-center px-4">
-						<p class="text-sm sm:text-base font-medium text-gray-800 dark:text-white bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
+						<p
+							class="text-sm sm:text-base font-medium text-white bg-gray-800/70 backdrop-blur-sm rounded-lg px-4 py-2 inline-block"
+						>
 							{images[currentIndex].name}
 						</p>
 					</div>
