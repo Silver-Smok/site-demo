@@ -1,4 +1,7 @@
 <script>
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import SvGdivider from '$lib/components/SVGdivider.svelte';
 	import SixBoxes from '$lib/components/SixBoxes.svelte';
 	import Accordion from '$lib/components/Accordion.svelte';
@@ -18,6 +21,103 @@
 		IconLock,
 		IconBuildingStore
 	} from '@tabler/icons-svelte';
+
+
+
+	let heroSection;
+	let heroTitle;
+	let heroOverlay;
+	let heroContainer;
+	let heroBackground;
+
+	onMount(() => {
+		// Enregistrer le plugin ScrollTrigger
+		gsap.registerPlugin(ScrollTrigger);
+
+		// Timeline principale avec ScrollTrigger en mode pin
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: heroSection,
+				start: 'top top',
+				end: '+=150%', // Durée de l'effet (150% de la hauteur de viewport)
+				scrub: 1, // Animation liée au scroll
+				pin: true, // Fixer la section pendant le scroll
+				anticipatePin: 1,
+				markers: false // Mettez true pour debug
+			}
+		});
+
+		// 0. Zoom progressif sur l'image de fond (effet cinématique)
+		tl.to(heroBackground, {
+			scale: 1.3, // Zoom de 130%
+			duration: 2,
+			ease: 'power1.inOut'
+		}, 0);
+
+		// 1. Assombrir progressivement l'image de fond + effet de flou
+		tl.to(heroOverlay, {
+			 opacity: 0.75,
+			duration: 1,
+			ease: 'power2.inOut'
+		}, 0);
+
+		// 2. Centrer le conteneur du titre (verticalement et horizontalement)
+		tl.to(heroContainer, {
+			y: '40vh', // Descendre pour centrer verticalement
+			duration: 1,
+			ease: 'power2.inOut'
+		}, 0);
+
+		// 3. Animer les mots du titre avec effet 3D
+		const titleWords = heroTitle.querySelectorAll('.word');
+		tl.fromTo(
+			titleWords,
+			{
+				opacity: 0,
+				y: 100,
+				rotationX: -90,
+				transformOrigin: '50% 50% -100px'
+			},
+			{
+				opacity: 1,
+				y: 0,
+				rotationX: 0,
+				duration: 0.8,
+				stagger: 0.08,
+				ease: 'power4.out'
+			},
+			0.3
+		);
+
+		// 4. Effet de glow sur le titre
+		tl.to(heroTitle, {
+			textShadow: '0 0 20px rgba(35, 183, 229, 0.8), 0 0 40px rgba(35, 183, 229, 0.5)',
+			duration: 0.6,
+			ease: 'power2.inOut'
+		}, 0.5);
+
+		// 5. Faire disparaître le titre en fade out
+		tl.to(heroTitle, {
+			opacity: 0,
+			y: -50,
+			duration: 0.8,
+			ease: 'power2.in'
+		}, 1.5);
+
+		// 6. Assombrir complètement + augmenter le flou avant de laisser défiler
+		tl.to(heroOverlay, {
+			opacity: 1,
+			backdropFilter: 'blur(20px)',
+			webkitBackdropFilter: 'blur(20px)',
+			duration: 0.5,
+			ease: 'power2.inOut'
+		}, 1.8);
+
+		// Cleanup
+		return () => {
+			ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+		};
+	});
 
 	/*----Section summary----*/
 	let boxesContent = [
@@ -237,10 +337,19 @@
 <main class="dark:bg-gray-900 dark:text-white text-black">
 	<!-- HomeBanner -->
 
-	<section class="bg-image h-screen flex flex-col">
-		<div class=" h-28 flex items-center justify-center">
-			<h2 class="text-2xl xl:text-4xl text-center text-white">
-				DES CAPACITÉS MULTIPLES, UNE CAISSE ENREGISTREUSE EN LIGNE INTELLIGENTE
+	<section bind:this={heroSection} class="hero-section h-screen flex flex-col relative overflow-hidden">
+		<!-- Background image avec zoom -->
+		<div bind:this={heroBackground} class="hero-background bg-image"></div>
+		
+		<!-- Overlay noir qui s'assombrit progressivement -->
+		<div bind:this={heroOverlay} class="hero-overlay"></div>
+		
+		<!-- Conteneur du titre -->
+		<div bind:this={heroContainer} class="hero-container h-28 flex items-center justify-center relative z-10">
+			<h2 bind:this={heroTitle} class="hero-title text-2xl xl:text-4xl text-center text-white">
+				{#each 'DES CAPACITÉS MULTIPLES, UNE CAISSE ENREGISTREUSE EN LIGNE INTELLIGENTE'.split(' ') as word}
+					<span class="word inline-block" style="perspective: 1000px;">{word}&nbsp;</span>
+				{/each}
 			</h2>
 		</div>
 	</section>
@@ -314,11 +423,55 @@
 </main>
 
 <style>
+	.hero-section {
+		position: relative;
+	}
+
+	.hero-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		transform-origin: center center;
+		will-change: transform;
+		z-index: 0;
+	}
+
 	.bg-image {
-		/* background-image: url('/ordiApp.png'); */
 		background-image: url('/fonctionalite-banner.jpg');
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;
+	}
+
+	.hero-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgb(0, 0, 0);
+		opacity: 0;
+		pointer-events: none;
+		z-index: 1;
+		backdrop-filter: blur(0px);
+		-webkit-backdrop-filter: blur(0px);
+		will-change: opacity, backdrop-filter;
+	}
+
+	.hero-container {
+		position: relative;
+		z-index: 10;
+	}
+
+	.hero-title {
+		perspective: 1000px;
+	}
+
+	.word {
+		display: inline-block;
+		white-space: pre;
+		transform-style: preserve-3d;
 	}
 </style>
