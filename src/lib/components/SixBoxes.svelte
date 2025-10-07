@@ -15,11 +15,11 @@
 			{#each boxesContent as box}
 				 
 				<a
-					class="block rounded-xl border dark:border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-[#3a9ac7]/50"
+					class="block rounded-xl border dark:border-gray-800 p-8 shadow-xl transition  dark:hover:border-[#23B7E5] dark:hover:shadow-[#23B7E5] hover:shadow-[#3a9ac7]/50"
 					href={box.href}
 				>
 
-				<svelte:component this={box.component} size={36} color="#3a9ac7" />
+				<svelte:component this={box.component} size={36} color="#23B7E5" />
 
 					<h3 class="text-xl font-bold mb-2">{box.title}</h3>
 
