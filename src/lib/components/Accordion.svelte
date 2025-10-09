@@ -1,4 +1,7 @@
 <script>
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import HeadingTitle from './HeadingTitle.svelte';
 	import HeadingParagraph from './HeadingParagraph.svelte';
 	import { IconChevronDown } from '@tabler/icons-svelte';
@@ -11,6 +14,7 @@
 
 	let openIndex = $state(0);
 	let selectedImage = $state(0);
+	let accordionSection;
 
 	function toggleAccordion(index) {
 		if (openIndex === index) {
@@ -20,6 +24,59 @@
 			selectedImage = index;
 		}
 	}
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const triggers = [];
+
+		// Animation de l'accordéon (slide from left)
+		const accordionAnim = gsap.fromTo(
+			'.accordion-container',
+			{ opacity: 0, x: -80 },
+			{
+				opacity: 1,
+				x: 0,
+				duration: 1,
+				ease: 'power3.out',
+				scrollTrigger: {
+					trigger: accordionSection,
+					start: 'top 75%',
+					end: 'top 30%',
+					toggleActions: 'play none none reverse',
+					markers: true,
+					scrub: 1
+				}
+			}
+		);
+		if (accordionAnim.scrollTrigger) triggers.push(accordionAnim.scrollTrigger);
+
+		// Animation de l'image (slide from right)
+		const imageAnim = gsap.fromTo(
+			'.accordion-image',
+			{ opacity: 0, x: 80 },
+			{
+				opacity: 1,
+				x: 0,
+				duration: 1,
+				ease: 'power3.out',
+				scrollTrigger: {
+					trigger: accordionSection,
+					start: 'top 75%',
+					end: 'top 30%',
+					toggleActions: 'play none none reverse',
+					markers: true,
+					scrub: 1
+				}
+			}
+		);
+		if (imageAnim.scrollTrigger) triggers.push(imageAnim.scrollTrigger);
+
+		// Cleanup - ne tue que les triggers de ce composant
+		return () => {
+			triggers.forEach(trigger => trigger.kill());
+		};
+	});
 </script>
 
 <section id="statistiques" class="flex justify-center mt-20 px-4">
@@ -29,11 +86,11 @@
 	</div>
 </section>
 
-<section class="w-full my-10 px-4 sm:px-6 lg:px-8">
+<section bind:this={accordionSection} class="w-full my-10 px-4 sm:px-6 lg:px-8">
 	<div class="mx-auto max-w-screen-2xl">
 		<div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
 			<!-- Accordéon -->
-			<div class="w-full lg:w-2/5 xl:w-1/3">
+			<div class="accordion-container w-full lg:w-2/5 xl:w-1/3">
 				<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
 					{#each sectionsTabAccordion as section, index}
 						<div class="border-b border-gray-200 dark:border-gray-700 last:border-b-0">
@@ -63,7 +120,7 @@
 			</div>
 
 			<!-- Image -->
-			<div class="w-full lg:w-3/5 xl:w-2/3">
+			<div class="accordion-image w-full lg:w-3/5 xl:w-2/3">
 				<div class="relative h-64 sm:h-80 md:h-96 lg:h-full lg:min-h-[500px] rounded-xl overflow-hidden shadow-2xl bg-gray-100 dark:bg-gray-800">
 					{#if imagesTabAccordion[selectedImage]}
 						<img 

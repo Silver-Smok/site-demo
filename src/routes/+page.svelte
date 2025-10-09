@@ -7,6 +7,15 @@
 	import Cta from '$lib/components/CTA.svelte';
 	import LeftCta from '$lib/components/LeftCTA.svelte';
 	import TextBanner from '../lib/components/TextBanner.svelte';
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		// Assurez-vous que le plugin est enregistré
+		gsap.registerPlugin(ScrollTrigger);
+		ScrollTrigger.refresh(); // Nettoyer tous les anciens triggers
+	});
 
 	let header3icons = {
 		title: 'Gérez votre commerce en toute simplicité',

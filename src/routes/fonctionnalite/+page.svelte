@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import SvGdivider from '$lib/components/SVGdivider.svelte';
@@ -23,7 +23,7 @@
 	} from '@tabler/icons-svelte';
 
 
-
+	let heroDiv;
 	let heroSection;
 	let heroTitle;
 	let heroOverlay;
@@ -34,18 +34,29 @@
 		// Enregistrer le plugin ScrollTrigger
 		gsap.registerPlugin(ScrollTrigger);
 
+		// Configuration globale de ScrollTrigger pour éviter les conflits avec SvelteKit
+		ScrollTrigger.config({
+			autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
+		});
+
+		const triggers = [];
+
 		// Timeline principale avec ScrollTrigger en mode pin
 		const tl = gsap.timeline({
 			scrollTrigger: {
-				trigger: heroSection,
+				trigger: heroDiv,
 				start: 'top top',
 				end: '+=150%', // Durée de l'effet (150% de la hauteur de viewport)
 				scrub: 1, // Animation liée au scroll
 				pin: true, // Fixer la section pendant le scroll
 				anticipatePin: 1,
-				markers: false // Mettez true pour debug
+				pinSpacing: false,
+				markers: true // Mettez true pour debug
 			}
 		});
+
+		// Stocker le ScrollTrigger de la timeline
+		if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);
 
 		// 0. Zoom progressif sur l'image de fond (effet cinématique)
 		tl.to(heroBackground, {
@@ -56,9 +67,16 @@
 
 		// 1. Assombrir progressivement l'image de fond + effet de flou
 		tl.to(heroOverlay, {
-			 opacity: 0.75,
+			opacity: 0.75,
+			backdropFilter: 'blur(10px)',
 			duration: 1,
-			ease: 'power2.inOut'
+			ease: 'power2.inOut',
+			onUpdate: function() {
+				// Appliquer manuellement le préfixe webkit pour Safari
+				if (heroOverlay) {
+					heroOverlay.style.webkitBackdropFilter = heroOverlay.style.backdropFilter;
+				}
+			}
 		}, 0);
 
 		// 2. Centrer le conteneur du titre (verticalement et horizontalement)
@@ -108,15 +126,16 @@
 		tl.to(heroOverlay, {
 			opacity: 1,
 			backdropFilter: 'blur(20px)',
-			webkitBackdropFilter: 'blur(20px)',
 			duration: 0.5,
-			ease: 'power2.inOut'
+			ease: 'power2.inOut',
+			onUpdate: function() {
+				// Appliquer manuellement le préfixe webkit pour Safari
+				if (heroOverlay) {
+					heroOverlay.style.webkitBackdropFilter = heroOverlay.style.backdropFilter;
+				}
+			}
 		}, 1.8);
 
-		// Cleanup
-		return () => {
-			ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-		};
 	});
 
 	/*----Section summary----*/
@@ -281,8 +300,7 @@
 	/*----Section Client----*/
 
 	let titleClient = 'Gestion de clients';
-	let clientIntro =
-		"L'un des objectifs de cette application est aussi de permettre une relation client personnalisée, et de pouvoir mettre en place un suivi de la clientèle. Grâce à des fiches clients complètes, nous pouvons voir au moment de la vente quels sont les produits achetés auparavant par le consommateur, et ainsi lui proposer ces derniers, ou des articles en relation susceptibles de lui plaire.";
+	let clientIntro = "L'un des objectifs de cette application est aussi de permettre une relation client personnalisée, et de pouvoir mettre en place un suivi de la clientèle. Grâce à des fiches clients complètes, nous pouvons voir au moment de la vente quels sont les produits achetés auparavant par le consommateur, et ainsi lui proposer ces derniers, ou des articles en relation susceptibles de lui plaire.";
 
 	let ficheClient = {
 		title: 'Fiche Client',
@@ -334,30 +352,30 @@
 	<meta name="description" content="Découvrez toutes les fonctionnalités de SilverStock : statistiques, gestion des stocks, management d'équipes, gestion produits et clients, sécurité." />
 </svelte:head>
 
-<main class="dark:bg-gray-900 dark:text-white text-black">
+<main class="dark:bg-gray-900 dark:text-white text-black overflow-x-hidden">
 	<!-- HomeBanner -->
 
-	<section bind:this={heroSection} class="hero-section h-screen flex flex-col relative overflow-hidden">
-		<!-- Background image avec zoom -->
-		<div bind:this={heroBackground} class="hero-background bg-image"></div>
-		
-		<!-- Overlay noir qui s'assombrit progressivement -->
-		<div bind:this={heroOverlay} class="hero-overlay"></div>
-		
-		<!-- Conteneur du titre -->
-		<div bind:this={heroContainer} class="hero-container h-28 flex items-center justify-center relative z-10">
-			<h2 bind:this={heroTitle} class="hero-title text-2xl xl:text-4xl text-center text-white">
-				{#each 'DES CAPACITÉS MULTIPLES, UNE CAISSE ENREGISTREUSE EN LIGNE INTELLIGENTE'.split(' ') as word}
-					<span class="word inline-block" style="perspective: 1000px;">{word}&nbsp;</span>
-				{/each}
-			</h2>
-		</div>
-	</section>
-
-	<SvGdivider />
-
+	<div bind:this={heroDiv}>
+		<section bind:this={heroSection} class="hero-section h-screen flex flex-col relative overflow-hidden">
+			<!-- Background image avec zoom -->
+			<div bind:this={heroBackground} class="hero-background bg-image"></div>
+			
+			<!-- Overlay noir qui s'assombrit progressivement -->
+			<div bind:this={heroOverlay} class="hero-overlay"></div>
+			
+			<!-- Conteneur du titre -->
+			<div bind:this={heroContainer} class="hero-container h-28 flex items-center justify-center relative z-10">
+				<h2 bind:this={heroTitle} class="hero-title text-2xl xl:text-4xl text-center text-white">
+					{#each 'DES CAPACITÉS MULTIPLES, UNE CAISSE ENREGISTREUSE EN LIGNE INTELLIGENTE'.split(' ') as word}
+						<span class="word inline-block" style="perspective: 1000px;">{word}&nbsp;</span>
+					{/each}
+				</h2>
+			</div>
+		</section>
+		<SvGdivider />
+	</div>
 	<!-- Summary -->
-
+	<div class="pt-[150vh]"></div>
 	<SixBoxes {boxesContent} />
 
 	<!-- Section Stats -->

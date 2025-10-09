@@ -1,9 +1,13 @@
 <script>
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import HeadingTitle from './HeadingTitle.svelte';
 	import HeadingParagraph from './HeadingParagraph.svelte';
 	
 	let titleStocks = 'Gestion de Stocks';
 	let activeTab = $state(0);
+	let tabSection;
 
 	let stockIntro =
 		"Toute la chaîne de vie d'un produit au sein de l'entreprise est gérée par l'application, de son arrivée au dépôt à sa remise au client lors de la finalisation de la vente. Grâce à un algorithme de prévision des besoins basé sur les statistiques de ventes des semaines précédentes, les commandes sont optimisées au plus juste pour les semaines à venir. En effet, tandis que la tendance est au surstock, ou à la rupture momentanée dans certaines enseignes, vous pourrez vous targuer d'avoir à disposition l'outil calculant vos besoins au plus juste, comprenant un léger stock tampon en prévision de hausses de ventes inattendues ou de difficultés d'approvisionnement. Ainsi, vous éviterez facilement les immobilisations financières inutiles et les ruptures dans le même temps !";
@@ -28,6 +32,57 @@
 			alt: 'Stocks des boutiques'
 		}
 	];
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const triggers = [];
+
+		// Animation des tabs (fade + slide from bottom)
+		const tabsAnim = gsap.fromTo(
+			'.tab-buttons',
+			{ opacity: 0, y: 30 },
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.8,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: tabSection,
+					start: 'top 75%',
+					end: 'top 30%',
+					scrub: 1,
+					toggleActions: 'play none none reverse'
+				}
+			}
+		);
+		if (tabsAnim.scrollTrigger) triggers.push(tabsAnim.scrollTrigger);
+
+		// Animation du contenu des tabs (fade + scale)
+		const contentAnim = gsap.fromTo(
+			'.tab-content-container',
+			{ opacity: 0, scale: 0.95 },
+			{
+				opacity: 1,
+				scale: 1,
+				duration: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: tabSection,
+					start: 'top 70%',
+					end: 'top 30%',
+					toggleActions: 'play none none reverse',
+					scrub: 1
+				}
+			}
+		);
+		if (contentAnim.scrollTrigger) triggers.push(contentAnim.scrollTrigger);
+
+		// Cleanup - ne tue que les triggers de ce composant
+		return () => {
+			triggers.forEach(trigger => trigger.kill());
+		};
+	});
 </script>
 
 <section id="stocks" class="flex justify-center mt-20 px-4">
@@ -37,9 +92,9 @@
 	</div>
 </section>
 
-<section class="mx-auto max-w-screen-2xl px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8">
+<section bind:this={tabSection} class="mx-auto max-w-screen-2xl px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8">
 	<!-- Navigation des tabs -->
-	<div class="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
+	<div class="tab-buttons border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
 		<ul class="flex flex-nowrap sm:flex-wrap -mb-px text-sm font-medium text-center min-w-max sm:min-w-0" role="tablist">
 			{#each tabAccordion as tab, i}
 				<li class="flex-shrink-0 sm:flex-shrink">
@@ -61,7 +116,7 @@
 	</div>
 
 	<!-- Contenu des tabs -->
-	<div class="mt-6 sm:mt-8">
+	<div class="tab-content-container mt-6 sm:mt-8">
 		{#each tabAccordion as tab, i}
 			{#if activeTab === i}
 				<div 

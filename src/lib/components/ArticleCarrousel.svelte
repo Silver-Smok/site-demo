@@ -1,9 +1,13 @@
 <script>
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { images } from './+server.js';
 	import { IconChevronLeft, IconChevronRight } from '@tabler/icons-svelte';
 
 	let currentIndex = $state(0);
 	let isTransitioning = $state(false);
+	let carouselSection;
 
 	function nextSlide() {
 		if (isTransitioning) return;
@@ -25,13 +29,67 @@
 		currentIndex = index;
 		setTimeout(() => isTransitioning = false, 300);
 	}
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const triggers = [];
+
+		// Animation du carousel (slide from left + scale)
+		const carouselAnim = gsap.fromTo(
+			'.carousel-container',
+			{ opacity: 0, x: -80, scale: 0.9 },
+			{
+				opacity: 1,
+				x: 0,
+				scale: 1,
+				duration: 1.2,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: carouselSection,
+					start: 'top 75%',
+					end: 'top 25%',
+					toggleActions: 'play none none reverse',
+					markers: true,
+					scrub: 1
+				}
+			}
+		);
+		if (carouselAnim.scrollTrigger) triggers.push(carouselAnim.scrollTrigger);
+
+		// Animation du contenu à droite (slide from right)
+		const contentAnim = gsap.fromTo(
+			'.carousel-content',
+			{ opacity: 0, x: 80 },
+			{
+				opacity: 1,
+				x: 0,
+				duration: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: carouselSection,
+					start: 'top 75%',
+					end: 'top 25%',
+					toggleActions: 'play none none reverse',
+					markers: true,
+					scrub: 1
+				}
+			}
+		);
+		if (contentAnim.scrollTrigger) triggers.push(contentAnim.scrollTrigger);
+
+		// Cleanup - ne tue que les triggers de ce composant
+		return () => {
+			triggers.forEach(trigger => trigger.kill());
+		};
+	});
 </script>
 
-<section class="py-5">
+<section bind:this={carouselSection} class="py-5">
 	<div class="mx-auto max-w-screen-2xl px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 			<!-- Carousel -->
-			<div class="relative z-10 flex items-center justify-center">
+			<div class="carousel-container relative z-10 flex items-center justify-center">
 				<div class="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 shadow-2xl">
 					<!-- Images -->
 					{#each images as image, i}
@@ -91,7 +149,7 @@
 
 			<!-- Contenu -->
 			<div
-				class="relative flex items-center bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 dark:from-blue-800 dark:via-blue-900 dark:to-indigo-950 rounded-xl lg:rounded-l-none shadow-2xl"
+				class="carousel-content relative flex items-center bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 dark:from-blue-800 dark:via-blue-900 dark:to-indigo-950 rounded-xl lg:rounded-l-none shadow-2xl"
 			>
 				<span
 					class="hidden lg:absolute lg:inset-y-0 lg:-left-16 lg:block lg:w-16 rounded-l-xl bg-gradient-to-r from-indigo-700 to-blue-600"

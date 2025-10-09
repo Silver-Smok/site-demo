@@ -12,5 +12,13 @@ export default defineConfig({
 				api: 'modern-compiler'
 			}
 		}
+	},
+	server: {
+		fs: {
+			strict: false
+		}
+	},
+	ssr: {
+		noExternal: ['sveltekit-superforms']
 	}
 });
