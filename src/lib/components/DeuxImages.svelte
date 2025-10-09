@@ -24,8 +24,7 @@
 				scrollTrigger: {
 					trigger: twoImagesSection,
 					start: 'top 75%',
-					toggleActions: 'play none none reverse',
-					markers: true,
+					end: 'top 30%',
 					scrub: 1
 				}
 			}
@@ -47,7 +46,6 @@
 					start: 'top 75%',
 					end: 'top 30%',
 					toggleActions: 'play none none reverse',
-					markers: true,
 					scrub: 1
 				}
 			}
@@ -68,9 +66,7 @@
 				scrollTrigger: {
 					trigger: twoImagesSection,
 					start: 'top 75%',
-					toggleActions: 'play none none reverse',
                     end: 'top 30%',
-					markers: true,
 					scrub: 1
 				}
 			}

@@ -30,7 +30,6 @@
 					start: 'top 75%',
 					end: 'top 25%',
 					scrub: 2,
-					markers: true
 				}
 			}
 		);
@@ -48,7 +47,6 @@
 					start: 'top 75%',
 					end: 'top 25%',
 					scrub: 2,
-					markers: true
 				}
 			}
 		);

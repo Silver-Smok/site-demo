@@ -1,5 +1,5 @@
 <script>
-	import { onMount, tick } from 'svelte';
+	import { onDestroy, onMount, tick } from 'svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import SvGdivider from '$lib/components/SVGdivider.svelte';
@@ -30,6 +30,10 @@
 	let heroContainer;
 	let heroBackground;
 
+	onDestroy(() => {
+		ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+		gsap.killTweensOf('*');
+	});
 	onMount(() => {
 		// Enregistrer le plugin ScrollTrigger
 		gsap.registerPlugin(ScrollTrigger);
@@ -51,7 +55,6 @@
 				pin: true, // Fixer la section pendant le scroll
 				anticipatePin: 1,
 				pinSpacing: false,
-				markers: true // Mettez true pour debug
 			}
 		});
 

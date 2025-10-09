@@ -25,7 +25,6 @@
 					trigger: threeIconsSection,
 					start: 'top 75%',
 					end: 'top 25%',
-					markers	: true,
 					scrub: 2
 				}
 			}
@@ -48,7 +47,6 @@
 					trigger: threeIconsSection,
 					start: 'top 75%',
 					end: 'top 25%',
-					markers	: true,
 					scrub: 1
 				}
 			}

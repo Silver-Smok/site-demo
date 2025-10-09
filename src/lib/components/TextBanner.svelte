@@ -34,7 +34,6 @@
 				start: 'top bottom',
 				end: 'top 50%',
 				scrub: 1,
-				markers: true,
 				id: 'gear-entry'
 			}
 		});
@@ -48,7 +47,6 @@
 				start: 'top 50%', // Commence où la première se termine
 				end: 'bottom top',
 				scrub: 1,
-				markers: true,
 				id: 'gear-continue'
 			}
 		});

@@ -43,14 +43,11 @@
 				opacity: 1,
 				x: 0,
 				scale: 1,
-				duration: 1.2,
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: carouselSection,
 					start: 'top 75%',
 					end: 'top 25%',
-					toggleActions: 'play none none reverse',
-					markers: true,
 					scrub: 1
 				}
 			}
@@ -70,8 +67,6 @@
 					trigger: carouselSection,
 					start: 'top 75%',
 					end: 'top 25%',
-					toggleActions: 'play none none reverse',
-					markers: true,
 					scrub: 1
 				}
 			}

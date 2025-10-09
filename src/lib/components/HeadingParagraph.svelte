@@ -25,8 +25,7 @@
 				scrollTrigger: {
 					trigger: paragraphElement,
 					start: 'top 85%',
-					toggleActions: 'play none none reverse',
-					markers: true,
+					end: 'top 30%',
 					scrub: 1
 				}
 			}

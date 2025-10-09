@@ -37,14 +37,11 @@
 			{
 				opacity: 1,
 				x: 0,
-				duration: 1,
 				ease: 'power3.out',
 				scrollTrigger: {
 					trigger: accordionSection,
 					start: 'top 75%',
 					end: 'top 30%',
-					toggleActions: 'play none none reverse',
-					markers: true,
 					scrub: 1
 				}
 			}
@@ -58,14 +55,11 @@
 			{
 				opacity: 1,
 				x: 0,
-				duration: 1,
 				ease: 'power3.out',
 				scrollTrigger: {
 					trigger: accordionSection,
 					start: 'top 75%',
 					end: 'top 30%',
-					toggleActions: 'play none none reverse',
-					markers: true,
 					scrub: 1
 				}
 			}
