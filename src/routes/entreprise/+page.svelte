@@ -170,11 +170,11 @@
 	</div>
 </header>
 <main class="dark:bg-gray-900 dark:text-white shadow-lg dark:shadow-white">
-	<section class="flex justify-center py-32 shadow">
-		<article class=" flex w-5/6 items-center justify-evenly flex-wrap">
-			<div class="flex flex-col gap-20 md:w-3/6">
+	<section class="flex justify-center py-8 md:py-16 lg:py-32 shadow">
+		<article class=" flex w-11/12 md:w-5/6 items-center justify-evenly flex-wrap gap-8 md:gap-0">
+			<div class="flex flex-col gap-8 md:gap-12 lg:gap-20 w-full md:w-3/6">
 				<div class="flex flex-col gap-5">
-					<h3 bind:this={titleElement} class="text-3xl self-center">
+					<h3 bind:this={titleElement} class="text-2xl md:text-3xl self-center">
 						Une Solution Logicielle Innovante pour Entreprises Modernes
 					</h3>
 				</div>
@@ -208,10 +208,10 @@
 					</p>
 				</div>
 			</div>
-			<div class="py-5">
+			<div class="py-5 w-full md:w-auto px-4 md:px-0">
 				<img
 					bind:this={founderImage}
-					class="max-w-[550px]"
+					class="w-full max-w-[550px] h-auto mx-auto"
 					src="/Mafrite.jpg"
 					alt="Mossadegh AFRIT - Président Directeur Général"
 				/>
@@ -222,13 +222,13 @@
 	<Cta buttonAttributs={buttonCta} tabCTA={presentation} />
 
 	<section class="bg-white dark:bg-gray-900">
-		<div class="container px-6 py-10 mx-auto">
-			<hr class="border-gray-200 my-12 dark:border-gray-700" />
+		<div class="container px-4 sm:px-6 py-10 mx-auto">
+			<hr class="border-gray-200 my-8 md:my-12 dark:border-gray-700" />
 
-			<div class="lg:flex lg:items-center py-10">
-				<div class="w-full space-y-12 lg:w-1/2">
+			<div class="lg:flex lg:items-center py-6 md:py-10 gap-8">
+				<div class="w-full space-y-8 md:space-y-12 lg:w-1/2">
 					<div>
-						<h1 bind:this={erpTitle} class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
+						<h1 bind:this={erpTitle} class="text-2xl md:text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
 							Une application <br /> ERP / CRM
 						</h1>
 
@@ -315,17 +315,17 @@
 					</div>
 				</div>
 
-				<div class="hidden lg:flex lg:items-center lg:w-1/2 lg:justify-center">
+				<div class="hidden md:flex lg:items-center lg:w-1/2 lg:justify-center mt-8 lg:mt-0 px-4">
 					<img
 						bind:this={erpImage}
-						class="w-[28rem] h-[28rem] object-cover xl:w-[34rem] xl:h-[34rem] rounded-full"
+						class="w-full max-w-md aspect-square object-cover rounded-full"
 						src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=755&q=80"
 						alt=""
 					/>
 				</div>
 			</div>
 
-			<hr class="border-gray-200 my-12 dark:border-gray-700" />
+			<hr class="border-gray-200 my-8 md:my-12 dark:border-gray-700" />
 		</div>
 	</section>
 </main>

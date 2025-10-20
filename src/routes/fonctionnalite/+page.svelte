@@ -32,7 +32,6 @@
 
 	onDestroy(() => {
 		ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-		gsap.killTweensOf('*');
 	});
 	onMount(() => {
 		// Enregistrer le plugin ScrollTrigger

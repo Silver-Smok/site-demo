@@ -39,7 +39,6 @@
 				opacity: 1,
 				x: 0,
 				y: 0,
-				duration: 1.2,
 				ease: 'power3.out',
 				scrollTrigger: {
 					trigger: twoImagesSection,
