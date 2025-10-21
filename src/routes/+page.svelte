@@ -87,7 +87,7 @@
 	<meta name="description" content="SilverStock est une application de gestion complète pour votre commerce : caisse enregistreuse en ligne, gestion des stocks, statistiques en temps réel et bien plus." />
 </svelte:head>
 
-<div class="dark:text-white dark:bg-gray-900">
+<div class="dark:text-white dark:bg-gray-900 overflow-x-hidden">
 	<HomeBanners />
 	<SectionImgRight />
 	<SVGdivider />

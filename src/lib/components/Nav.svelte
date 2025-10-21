@@ -1,8 +1,11 @@
 <script>
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
 
 	let menuOpen = $state(false);
 	let darkMode = $state(false);
+	let menuElement;
 
 	const navigation = [
 		{ href: '/', label: 'Accueil' },
@@ -14,7 +17,57 @@
 	];
 
 	function toggleMenu() {
-		menuOpen = !menuOpen;
+		if (window.innerWidth < 768) {
+			if (!menuOpen) {
+				// Ouvre le menu
+				menuOpen = true;
+				// Attend que le DOM soit mis à jour
+				setTimeout(() => {
+					gsap.fromTo(
+						menuElement,
+						{
+							opacity: 0,
+							y: -20,
+							height: 0
+						},
+						{
+							opacity: 1,
+							y: 0,
+							height: 'auto',
+							duration: 0.3,
+							ease: 'power3.out'
+						}
+					);
+				}, 10);
+			} else {
+				// Ferme le menu avec animation
+				closeMenuWithAnimation();
+			}
+		} else {
+			// Sur desktop, toggle simple
+			menuOpen = !menuOpen;
+		}
+	}
+
+	function closeMenuWithAnimation() {
+		// Anime la fermeture uniquement sur mobile
+		if (window.innerWidth < 768 && menuOpen) {
+			// Ajoute overflow hidden pour masquer le contenu pendant l'animation
+			gsap.set(menuElement, { overflow: 'hidden' });
+			
+			gsap.to(menuElement, {
+				opacity: 0,
+				y: -20,
+				height: 0,
+				duration: 0.4,
+				ease: 'power1.in',
+				onComplete: () => {
+					menuOpen = false;
+					// Réinitialise les styles pour la prochaine ouverture
+					gsap.set(menuElement, { opacity: 1, y: 0, height: 'auto', overflow: 'visible' });
+				}
+			});
+		}
 	}
 
 	function toggleDarkMode() {
@@ -101,6 +154,7 @@
 
 		<!-- Navigation Menu -->
 		<div
+			bind:this={menuElement}
 			class="items-center justify-between w-full md:flex md:w-auto md:order-1 {menuOpen
 				? ''
 				: 'hidden'}"
@@ -113,6 +167,7 @@
 					<li>
 						<a
 							href={navItem.href}
+							onclick={closeMenuWithAnimation}
 							class="block py-2 px-3 rounded md:p-0 {$page.url.pathname === navItem.href
 								? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500'
 								: 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'}"

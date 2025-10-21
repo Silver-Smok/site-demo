@@ -21,8 +21,8 @@
 		// Première animation : entrée avec rotation et déplacement
 		gsap.fromTo(gearIcon,{
 			rotation: 0,
-			x:1000,
-			y:-500,
+			x:'100vw',
+			y:'-100vh',
 		},
 		 {
 			rotation: 760,
@@ -53,10 +53,10 @@
 	});
 </script>
 
-<section class="py-28" bind:this={sectionElement}>
+<section class="py-28 overflow-x-hidden" bind:this={sectionElement}>
 	<SvGdividerBottom {color} />
-	<article class="bg-black text-gray-100 flex items-center justify-center flex-col md:flex-row">
-		<div class="w-2/6 flex justify-center z-10">
+	<article class="bg-black text-gray-100 flex items-center justify-center flex-col md:flex-row overflow-hidden">
+		<div class="w-1/3 md:w-2/6 flex justify-center z-10">
 			<svg
 				bind:this={gearIcon}
 				xmlns="http://www.w3.org/2000/svg"
