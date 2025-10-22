@@ -104,19 +104,19 @@
 					<button
 						type="button"
 						onclick={prevSlide}
-						class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
+						class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
 						aria-label="Image précédente"
 					>
-						<IconChevronLeft class="w-6 h-6 text-gray-800 dark:text-white" />
+						<IconChevronLeft class="w-6 h-6 text-white" />
 					</button>
 
 					<button
 						type="button"
 						onclick={nextSlide}
-						class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
+						class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700 rounded-full p-2 transition-all duration-200 shadow-lg"
 						aria-label="Image suivante"
 					>
-						<IconChevronRight class="w-6 h-6 text-gray-800 dark:text-white" />
+						<IconChevronRight class="w-6 h-6 text-white" />
 					</button>
 
 					<!-- Indicateurs -->
@@ -135,7 +135,7 @@
 
 					<!-- Légende -->
 					<div class="absolute bottom-12 left-0 right-0 z-20 text-center px-4">
-						<p class="text-sm sm:text-base font-medium text-gray-800 dark:text-white bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
+						<p class="text-sm sm:text-base font-medium text-white bg-gray-800/70 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
 							{images[currentIndex].name}
 						</p>
 					</div>
