@@ -27,9 +27,9 @@
 				ease: 'none',
 				scrollTrigger: {
 					trigger: articleSection,
-					start: 'top 75%',
-					end: 'top 25%',
-					scrub: 2,
+						start: 'top bottom', // Quand le haut du composant touche le bas du viewport
+						end: 'bottom top',   // Quand le bas du composant touche le haut du viewport
+						scrub: 1
 				}
 			}
 		);
@@ -44,9 +44,9 @@
 				ease: 'none',
 				scrollTrigger: {
 					trigger: articleSection,
-					start: 'top 75%',
-					end: 'top 25%',
-					scrub: 2,
+					start: 'top bottom', // Quand le haut du composant touche le bas du viewport
+					end: 'bottom top',   // Quand le bas du composant touche le haut du viewport
+					scrub: 1
 				}
 			}
 		);
