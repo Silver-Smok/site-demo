@@ -38,9 +38,9 @@
 		gsap.registerPlugin(ScrollTrigger);
 
 		// Configuration globale de ScrollTrigger pour éviter les conflits avec SvelteKit
-		ScrollTrigger.config({
-			autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
-		});
+		// ScrollTrigger.config({
+		// 	autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
+		// });
 
 		const triggers = [];
 
@@ -54,7 +54,7 @@
 				pin: true, // Fixer la section pendant le scroll
 				anticipatePin: 1,
 				pinSpacing: false,
-				invalidateOnRefresh: true
+				// invalidateOnRefresh: true
 			}
 		});
 
@@ -144,7 +144,7 @@
 			// Un seul refresh après un délai suffisant pour que tout soit stabilisé
 			setTimeout(() => {
 				ScrollTrigger.refresh();
-			}, 300);
+			}, 5000);
 		});
 	});
 

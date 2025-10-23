@@ -38,41 +38,47 @@
 
 		const triggers = [];
 
-		// Animation des tabs (fade + slide from bottom) - OPTIMISÉE
-		const tabsAnim = gsap.fromTo(
-			'.tab-buttons',
-			{ opacity: 0, y: 30 },
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.8,
-				ease: 'power2.out',
-				scrollTrigger: {
-					trigger: tabSection,
-					start: 'top 75%',
-					toggleActions: 'play none none none' // Simplifié
+		// Attendre que le DOM soit complètement rendu
+		setTimeout(() => {
+			// Animation des tabs (fade + slide from bottom)
+			const tabsAnim = gsap.fromTo(
+				'.tab-buttons',
+				{ opacity: 0, y: 30 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.8,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: tabSection,
+						start: 'top bottom', // Quand le haut du composant touche le bas du viewport
+						end: 'bottom top',   // Quand le bas du composant touche le haut du viewport
+						scrub: 1
+					}
 				}
-			}
-		);
-		if (tabsAnim.scrollTrigger) triggers.push(tabsAnim.scrollTrigger);
+			);
+			if (tabsAnim.scrollTrigger) triggers.push(tabsAnim.scrollTrigger);
 
-		// Animation du contenu des tabs (fade + scale) - OPTIMISÉE
-		const contentAnim = gsap.fromTo(
-			'.tab-content-container',
-			{ opacity: 0, scale: 0.95 },
-			{
-				opacity: 1,
-				scale: 1,
-				duration: 1,
-				ease: 'power2.out',
-				scrollTrigger: {
-					trigger: tabSection,
-					start: 'top 70%',
-					toggleActions: 'play none none none' // Simplifié
+			// Animation du contenu des tabs (fade + scale) - légèrement décalée
+			const contentAnim = gsap.fromTo(
+				'.tab-content-container',
+				{ opacity: 0, scale: 0.95 },
+				{
+					opacity: 1,
+					scale: 1,
+					duration: 1,
+					ease: 'power2.out',
+					delay: 0.2,
+					scrollTrigger: {
+						trigger: tabSection,
+						start: 'top bottom',
+						end: 'bottom top',
+						scrub: 1
+					}
 				}
-			}
-		);
-		if (contentAnim.scrollTrigger) triggers.push(contentAnim.scrollTrigger);
+			);
+			if (contentAnim.scrollTrigger) triggers.push(contentAnim.scrollTrigger);
+		}, 100);
 
 		// Cleanup - ne tue que les triggers de ce composant
 		return () => {
@@ -88,7 +94,7 @@
 	</div>
 </section>
 
-<section bind:this={tabSection} class="mx-auto max-w-screen-2xl px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8">
+<section bind:this={tabSection} class=" mx-auto max-w-screen-2xl px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8">
 	<!-- Navigation des tabs -->
 	<div class="tab-buttons border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
 		<ul class="flex flex-nowrap sm:flex-wrap -mb-px text-sm font-medium text-center min-w-max sm:min-w-0" role="tablist">
