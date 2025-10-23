@@ -9,68 +9,70 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
-
+		
 		const triggers = [];
 
-		// Animation du texte (fade + slide from left)
-		const textAnim = gsap.fromTo(
-			'.two-images-text',
-			{ opacity: 0, x: -60 },
-			{
-				opacity: 1,
-				x: 0,
-				duration: 1,
-				ease: 'power3.out',
-				scrollTrigger: {
-					trigger: twoImagesSection,
-					start: 'top 75%',
-					end: 'top 30%',
-					scrub: 1
-				}
-			}
-		);
-		if (textAnim.scrollTrigger) triggers.push(textAnim.scrollTrigger);
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
 
-		// Animation de la première image (slide from bottom-left)
-		const image1Anim = gsap.fromTo(
-			'.image-one',
-			{ opacity: 0, x: -50, y: 50 },
-			{
-				opacity: 1,
-				x: 0,
-				y: 0,
-				ease: 'power3.out',
-				scrollTrigger: {
-					trigger: twoImagesSection,
-					start: 'top 75%',
-					end: 'top 30%',
-					toggleActions: 'play none none reverse',
-					scrub: 1
-				}
-			}
-		);
-		if (image1Anim.scrollTrigger) triggers.push(image1Anim.scrollTrigger);
+				// Animation du texte (fade + slide from left)
+				const textAnim = gsap.fromTo(
+					'.two-images-text',
+					{ opacity: 0, x: -60 },
+					{
+						opacity: 1,
+						x: 0,
+						duration: 1,
+						ease: 'power3.out',
+						scrollTrigger: {
+							trigger: twoImagesSection,
+							start: 'top 75%',
+							end: 'top 30%',
+							scrub: 1
+						}
+					}
+				);
+				if (textAnim.scrollTrigger) triggers.push(textAnim.scrollTrigger);
 
-		// Animation de la deuxième image (slide from bottom-right avec délai)
-		const image2Anim = gsap.fromTo(
-			'.image-two',
-			{ opacity: 0, x: 50, y: 50 },
-			{
-				opacity: 1,
-				x: 0,
-				y: 0,
-				duration: 1.2,
-				delay: 0.2,
-				ease: 'power3.out',
-				scrollTrigger: {
-					trigger: twoImagesSection,
-					start: 'top 75%',
-                    end: 'top 30%',
-					scrub: 1
-				}
-			}
-		);
-		if (image2Anim.scrollTrigger) triggers.push(image2Anim.scrollTrigger);
+				// Animation de la première image (slide from bottom-left)
+				const image1Anim = gsap.fromTo(
+					'.image-one',
+					{ opacity: 0, x: -50, y: 50},
+					{
+						opacity: 1,
+						x: 0,
+						y: 0,
+						ease: 'power3.out',
+						scrollTrigger: {
+							trigger: twoImagesSection,
+							start: 'top 75%',
+							end: 'top 30%',
+							scrub: 1
+						}
+					}
+				);
+				if (image1Anim.scrollTrigger) triggers.push(image1Anim.scrollTrigger);
+
+				// Animation de la deuxième image (slide from bottom-right avec délai)
+				const image2Anim = gsap.fromTo(
+					'.image-two',
+					{ opacity: 0, x: 50, y: 50 },
+					{
+						opacity: 1,
+						x: 0,
+						y: 0,
+						ease: 'power3.out',
+						scrollTrigger: {
+							trigger: twoImagesSection,
+							start: 'top 75%',
+							end: 'top 30%',
+							scrub: 1
+						}
+					}
+				);
+				if (image2Anim.scrollTrigger) triggers.push(image2Anim.scrollTrigger);
+			});
+		});
 
 		// Cleanup - ne tue que les triggers de ce composant
 		return () => {

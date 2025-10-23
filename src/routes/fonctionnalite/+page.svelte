@@ -50,10 +50,11 @@
 				trigger: heroDiv,
 				start: 'top top',
 				end: '+=150%', // Durée de l'effet (150% de la hauteur de viewport)
-				scrub: 1, // Animation liée au scroll
+				scrub: 1.5, // Animation liée au scroll (légèrement plus fluide pour éviter les lags)
 				pin: true, // Fixer la section pendant le scroll
 				anticipatePin: 1,
 				pinSpacing: false,
+				invalidateOnRefresh: true
 			}
 		});
 
@@ -138,6 +139,13 @@
 			}
 		}, 1.8);
 
+		// Refresh tous les scrolltriggers après stabilisation du DOM
+		tick().then(() => {
+			// Un seul refresh après un délai suffisant pour que tout soit stabilisé
+			setTimeout(() => {
+				ScrollTrigger.refresh();
+			}, 300);
+		});
 	});
 
 	/*----Section summary----*/

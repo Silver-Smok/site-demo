@@ -8,7 +8,6 @@
 	let boxesContainer;
 
 	onMount(() => {
-		console.log("Boxes section mounted");
 		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
