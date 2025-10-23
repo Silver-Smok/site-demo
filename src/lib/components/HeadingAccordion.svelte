@@ -38,7 +38,7 @@
 
 		const triggers = [];
 
-		// Animation des tabs (fade + slide from bottom)
+		// Animation des tabs (fade + slide from bottom) - OPTIMISÉE
 		const tabsAnim = gsap.fromTo(
 			'.tab-buttons',
 			{ opacity: 0, y: 30 },
@@ -50,15 +50,13 @@
 				scrollTrigger: {
 					trigger: tabSection,
 					start: 'top 75%',
-					end: 'top 30%',
-					scrub: 1,
-					toggleActions: 'play none none reverse'
+					toggleActions: 'play none none none' // Simplifié
 				}
 			}
 		);
 		if (tabsAnim.scrollTrigger) triggers.push(tabsAnim.scrollTrigger);
 
-		// Animation du contenu des tabs (fade + scale)
+		// Animation du contenu des tabs (fade + scale) - OPTIMISÉE
 		const contentAnim = gsap.fromTo(
 			'.tab-content-container',
 			{ opacity: 0, scale: 0.95 },
@@ -70,9 +68,7 @@
 				scrollTrigger: {
 					trigger: tabSection,
 					start: 'top 70%',
-					end: 'top 30%',
-					toggleActions: 'play none none reverse',
-					scrub: 1
+					toggleActions: 'play none none none' // Simplifié
 				}
 			}
 		);
