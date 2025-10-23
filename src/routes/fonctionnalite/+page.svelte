@@ -394,7 +394,7 @@
 
 	<!-- Section Stocks -->
 
-	<HeadingAccordion />
+	<!-- <HeadingAccordion /> -->
 
 	<!-- Section management -->
 
