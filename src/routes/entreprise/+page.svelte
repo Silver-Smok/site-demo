@@ -212,7 +212,7 @@
 				<img
 					bind:this={founderImage}
 					class="w-full max-w-[550px] h-auto mx-auto"
-					src="/Mafrite.jpg"
+					src="/Mafrit.jpg"
 					alt="Mossadegh AFRIT - Président Directeur Général"
 				/>
 			</div>
