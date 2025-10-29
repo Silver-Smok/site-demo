@@ -17,7 +17,7 @@
 		title: "SilverStock, qu'est-ce que c'est ?",
 		content:
 			"Issue d'un travail mené depuis 2015, l'application SilverStock est aujourd'hui à son stade le plus abouti et le plus fonctionnel. Développée par la synergie créée lors de brainstorming hebdomadaires entre les différents acteurs de deux entreprises de cigarette électronique (équipes de ventes, préparateurs de commandes, responsables des achats, pôle managérial...) et l'équipe de développement, ce projet s'est inscrit dans la modernisation de nos outils de gestion, jusqu'à en devenir un élément central et essentiel, nous ayant permis de nous démarquer des autres entreprises du secteur.",
-		src: '/iconSilverBig.webp',
+		src: 'Silver Stock-512x512.png',
 		alt: 'Vente'
 	};
 

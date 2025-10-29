@@ -13,7 +13,7 @@
 		<div class="p-8 flex items-center">
 			<div class="mx-auto max-w-xl text-center sm:text-left flex flex-col gap-5">
 				<div class="flex items-center justify-center gap-3 md:justify-start">
-					<img src="/logoSSrose.webp" alt="logo" class="h-20 w-20" />
+					<img src="/Silver Stock-80x80.png" alt="logo" class="h-20 w-20" />
 					<h1 class="text-3xl font-bold md:text-3xl text-slate-100">SilverStock</h1>
 				</div>
 				<h2 class="text-2xl font-bold md:text-3xl text-slate-100">
