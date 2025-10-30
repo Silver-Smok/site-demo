@@ -1,7 +1,6 @@
 <script>
 	import Cta from '$lib/components/CTA.svelte';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import { onMount } from 'svelte';
 
 	let titleElement;

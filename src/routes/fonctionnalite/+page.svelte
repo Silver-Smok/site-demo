@@ -1,7 +1,6 @@
 <script>
 	import { onDestroy, onMount, tick } from 'svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import SvGdivider from '$lib/components/SVGdivider.svelte';
 	import SixBoxes from '$lib/components/SixBoxes.svelte';
 	import Accordion from '$lib/components/Accordion.svelte';

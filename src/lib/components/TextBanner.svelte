@@ -1,8 +1,7 @@
 <script>
 	import SvGdivider from './SVGdivider.svelte';
 	import SvGdividerBottom from './SVGdividerBottom.svelte';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import { onMount } from 'svelte';
 
 	let color = 'shapedividers_com-1602';

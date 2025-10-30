@@ -13,9 +13,28 @@ export default defineConfig({
 			}
 		}
 	},
+	optimizeDeps: {
+		include: [
+			'gsap',
+			'gsap/ScrollTrigger',
+			'gsap/Draggable'
+		],
+		exclude: [
+			'@tabler/icons-svelte',
+			'@skeletonlabs/skeleton'
+		]
+	},
 	server: {
+		watch: {
+			ignored: [
+				'**/static/pdf/**',
+				'**/static/videos/**',
+				'**/.svelte-kit/**',
+				'**/node_modules/**'
+			]
+		},
 		fs: {
-			strict: false
+			strict: true
 		}
 	},
 	ssr: {

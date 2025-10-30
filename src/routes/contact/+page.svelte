@@ -1,11 +1,9 @@
 <script>
 	import { superForm } from 'sveltekit-superforms';
-	import { Button, Modal } from 'flowbite-svelte';
-	import { gsap } from 'gsap';
-	import { Draggable } from 'gsap/Draggable';
+	import { gsap, Draggable } from '$lib/gsap';
 	import { onMount } from 'svelte';
 
-	
+
 	let defaultModal = false;
 	export let data;
 	let formContainer; // Le wrapper qui contient SVG + form
@@ -109,6 +107,13 @@
 			}
 		}
 	});
+
+	// Handle modal backdrop keyboard events for accessibility
+	function handleBackdropKeydown(event) {
+		if (event.key === 'Escape' || event.key === 'Enter') {
+			defaultModal = false;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -120,29 +125,33 @@
 </svelte:head>
 
 <section bind:this={sectionContainer} class="dark:bg-gray-900 py-20 lg:py-[120px] overflow-hidden relative z-10 min-h-screen">
-	<div class="container">
-		<div class="flex flex-wrap lg:justify-between -mx-4">
-			<div class="w-full lg:w-1/2 xl:w-6/12 px-4">
-				<div bind:this={textContainer} class="max-w-[570px] mb-12 lg:mb-0 px-10">
-					<span class="block mb-4 dark:text-gray-50 font-semibold"> Contactez Nous </span>
+	<div class="container mx-auto px-4">
+		<div class="flex flex-wrap items-start gap-8 lg:gap-12">
+			<div class="w-full lg:w-[45%] flex-shrink-0 ">
+				<div bind:this={textContainer} class="max-w-[570px] mb-12 lg:mb-0 " >
+					<span class="block mb-4 text-blue-600 dark:text-blue-400 font-semibold text-sm uppercase tracking-wide"> Contactez Nous </span>
 					<h2
 						class="
 							dark:text-white
+							text-gray-900
 							mb-6
-							uppercase
 							font-bold
 							text-3xl
+							sm:text-4xl
+							lg:text-5xl
+							leading-tight
 							"
 					>
-						COMMENCEZ À PRENDRE EN MAIN VOTRE NOUVEL AVENIR PROFESSIONNEL
+						Commencez à prendre en main votre nouvel avenir professionnel
 					</h2>
-					<p class=" dark:text-gray-300 leading-relaxed mb-9">
+					<p class="text-gray-600 dark:text-gray-300 text-base sm:text-lg leading-relaxed mb-9">
 						Vous avez des questions ? Vous souhaitez en savoir plus sur nos services ? N'hésitez pas
 						à nous contacter via ce formulaire pour bénéficier d'une démonstration personnalisée.
 					</p>
+		
 				</div>
 			</div>
-			<div class="w-full lg:w-1/2 xl:w-5/12 px-4">
+			<div class="w-full lg:flex-1 lg:max-w-[550px]">
 				<div class="relative" bind:this={formContainer}>
 					<!-- SVG décoratifs EN ARRIÈRE-PLAN -->
 					<div class="decorative-svg">
@@ -283,17 +292,63 @@
 		</div>
 	</div>
 </section>
-<Modal title="Formulaire soumis" bind:open={defaultModal} autoclose>
-	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-		Votre message nous a été soumis avec succes.
-	</p>
-	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-		Nous feront notre maximum pour vous répondre dans les plus brefs délais.
-	</p>
-	<svelte:fragment slot="footer">
-		<Button>Retour</Button>
-	</svelte:fragment>
-</Modal>
+<!-- Custom Modal -->
+{#if defaultModal}
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 dark:bg-gray-900/80"
+		role="button"
+		tabindex="0"
+		aria-label="Fermer le modal"
+		on:click={() => defaultModal = false}
+		on:keydown={handleBackdropKeydown}
+	>
+		<div
+			class="relative w-full max-w-md bg-white rounded-lg shadow dark:bg-gray-700"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="modal-title"
+			tabindex="-1"
+			on:click|stopPropagation
+			on:keydown={handleBackdropKeydown}
+		>
+			<!-- Modal header -->
+			<div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+				<h3 id="modal-title" class="text-xl font-semibold text-gray-900 dark:text-white">
+					Formulaire soumis
+				</h3>
+				<button
+					type="button"
+					class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+					on:click={() => defaultModal = false}
+				>
+					<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+					</svg>
+					<span class="sr-only">Close modal</span>
+				</button>
+			</div>
+			<!-- Modal body -->
+			<div class="p-4 md:p-5 space-y-4">
+				<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+					Votre message nous a été soumis avec succes.
+				</p>
+				<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+					Nous feront notre maximum pour vous répondre dans les plus brefs délais.
+				</p>
+			</div>
+			<!-- Modal footer -->
+			<div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+				<button
+					type="button"
+					class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+					on:click={() => defaultModal = false}
+				>
+					Retour
+				</button>
+			</div>
+		</div>
+	</div>
+{/if}
 
 <style>
 	.form-glow {

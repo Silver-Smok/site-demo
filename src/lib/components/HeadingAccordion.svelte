@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import HeadingTitle from './HeadingTitle.svelte';
 	import HeadingParagraph from './HeadingParagraph.svelte';
 	

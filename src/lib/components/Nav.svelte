@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
+	import { gsap } from '$lib/gsap';
 
 	let menuOpen = $state(false);
 	let darkMode = $state(false);

@@ -7,8 +7,7 @@
 	import Cta from '$lib/components/CTA.svelte';
 	import LeftCta from '$lib/components/LeftCTA.svelte';
 	import TextBanner from '../lib/components/TextBanner.svelte';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import { onMount } from 'svelte';
 
 	onMount(() => {

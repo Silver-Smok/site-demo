@@ -1,8 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	import { Heading, Li, List } from 'flowbite-svelte';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import ButtonOne from './ButtonOne.svelte';
 
 	export let tabCTA = {};
@@ -82,16 +80,19 @@
 					{tabCTA.content}
 				</p>
 			{:else if tabList}
-				<Heading
-					tag="h2"
-					customSize="text-lg font-semibold"
-					class="mb-5 pt-10 text-lg font-semibold text-gray-900 dark:text-white">{title}</Heading
-				>
-				<List tag="ul" class="space-y-1">
+				<h2 class="mb-5 pt-10 text-lg font-semibold text-gray-900 dark:text-white">
+					{title}
+				</h2>
+				<ul class="space-y-1 text-gray-500 dark:text-gray-400">
 					{#each tabList as list}
-						<Li>{list.content}</Li>
+						<li class="flex items-start">
+							<svg class="w-3.5 h-3.5 me-2 mt-0.5 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+							</svg>
+							{list.content}
+						</li>
 					{/each}
-				</List>
+				</ul>
 			{/if}
 
 			<div class="mt-4 md:mt-8">
