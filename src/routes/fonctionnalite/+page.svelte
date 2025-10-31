@@ -142,7 +142,7 @@
 			// Un seul refresh après un délai suffisant pour que tout soit stabilisé
 			setTimeout(() => {
 				ScrollTrigger.refresh();
-			}, 800);
+			}, 5000);
 		});
 	});
 
