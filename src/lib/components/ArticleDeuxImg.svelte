@@ -1,7 +1,5 @@
 <script>
-	export let imgListDeuxImages = [];
-
-	export let header = {};
+	let { imgListDeuxImages = [], header = {} } = $props();
 </script>
 
 <section class="xl:h-screen xl:flex items-center ">
@@ -30,7 +28,7 @@
 
 			<div class="grid grid-cols-2  md:grid-cols-1 2xl:grid-cols-2">
 				{#each imgListDeuxImages as img}
-					<img alt={img.alt} src={img.src} class="h-40 w-full  object-cover sm:h-56 md:h-full " />
+					<img alt={img.alt} src={img.src} loading="lazy" decoding="async" class="h-40 w-full  object-cover sm:h-56 md:h-full " />
 				{/each}
 			</div>
 		</div>

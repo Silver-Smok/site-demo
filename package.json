@@ -37,15 +37,12 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@popperjs/core": "^2.11.8",
 		"@sveltejs/vite-plugin-svelte": "^6.0.0",
 		"@tabler/icons-svelte": "^3.35.0",
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
-		"classnames": "^2.5.1",
 		"gsap": "^3.13.0",
 		"mailgun.js": "^12.1.0",
-		"svelte-heros-v2": "^2.0.2",
 		"svelte-inview": "^4.0.4"
 	}
 }

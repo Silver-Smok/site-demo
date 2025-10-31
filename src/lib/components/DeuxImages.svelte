@@ -7,7 +7,6 @@
 	let twoImagesSection;
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 		
 		const triggers = [];
 
@@ -97,18 +96,22 @@
         <div class="relative w-full max-w-2xl h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center">
             <!-- Première image (arrière-plan, à gauche) -->
             <div class="image-one absolute left-4 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-0">
-                <img 
-                    src={twoImgContent.src} 
-                    alt={twoImgContent.alt} 
+                <img
+                    src={twoImgContent.src}
+                    alt={twoImgContent.alt}
+                    loading="lazy"
+                    decoding="async"
                     class="rounded-xl shadow-2xl w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-cover"
                 />
             </div>
-            
+
             <!-- Deuxième image (avant-plan, chevauchement à droite et légèrement en bas) -->
             <div class="image-two absolute left-32 sm:left-48 lg:left-60 xl:left-72 top-[55%] sm:top-[58%] -translate-y-1/2 z-10">
-                <img 
-                    src={twoImgContent.srcTwo} 
-                    alt={twoImgContent.altTwo} 
+                <img
+                    src={twoImgContent.srcTwo}
+                    alt={twoImgContent.altTwo}
+                    loading="lazy"
+                    decoding="async"
                     class="rounded-xl shadow-2xl w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-cover"
                 />
             </div>

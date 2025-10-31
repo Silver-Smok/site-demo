@@ -2,13 +2,11 @@
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 
-	export let header = {};
-	export let iconsTab = [];
-	
+	let { header = {}, iconsTab = [] } = $props();
+
 	let threeIconsSection;
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
 

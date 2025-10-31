@@ -34,7 +34,6 @@
 	});
 	onMount(() => {
 		// Enregistrer le plugin ScrollTrigger
-		gsap.registerPlugin(ScrollTrigger);
 
 		// Configuration globale de ScrollTrigger pour éviter les conflits avec SvelteKit
 		// ScrollTrigger.config({
@@ -143,7 +142,7 @@
 			// Un seul refresh après un délai suffisant pour que tout soit stabilisé
 			setTimeout(() => {
 				ScrollTrigger.refresh();
-			}, 5000);
+			}, 800);
 		});
 	});
 

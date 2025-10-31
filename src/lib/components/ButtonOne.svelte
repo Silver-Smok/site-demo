@@ -1,17 +1,15 @@
 <script>
-
     /**
      *     Exemple d'utilisation
-     * 
+     *
      * 	let buttonAttributs = {
      *  href: '#',
      *   text: "Commencez aujourd'hui",
      *   };
-     *   
+     *
      */
 
-    export let buttonAttributs = {};
-
+    let { buttonAttributs = {} } = $props();
 </script>
 
 <a

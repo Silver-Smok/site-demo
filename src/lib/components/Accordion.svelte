@@ -25,7 +25,6 @@
 	}
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
 

@@ -3,18 +3,18 @@
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import ButtonOne from './ButtonOne.svelte';
 
-	export let tabCTA = {};
-	export let borderImage = 'sm:rounded-tl-[30px] md:rounded-tl-[60px]';
-	export let layout = 'xl:flex-row';
-	export let buttonAttributs = {};
-	export let title =
-		'Notre application offre une fiche produit qui permet de centraliser toutes les informations importantes sur vos produits. Elle permet notamment de :';
-	export let tabList = [];
-	
+	let {
+		tabCTA = {},
+		borderImage = 'sm:rounded-tl-[30px] md:rounded-tl-[60px]',
+		layout = 'xl:flex-row',
+		buttonAttributs = {},
+		title = 'Notre application offre une fiche produit qui permet de centraliser toutes les informations importantes sur vos produits. Elle permet notamment de :',
+		tabList = []
+	} = $props();
+
 	let ctaSection;
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
 
@@ -104,6 +104,8 @@
 	<img
 		alt={tabCTA.alt}
 		src={tabCTA.src}
+		loading="lazy"
+		decoding="async"
 		class="z-[100] cta-image h-full 2xl:max-w-3xl max-w-xl object-cover sm:h-[calc(100%_-_2rem)] sm:self-center md:h-[calc(100%_-_4rem)] {borderImage} "
 	/>
 </section>

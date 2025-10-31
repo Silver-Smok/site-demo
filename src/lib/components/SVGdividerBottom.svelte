@@ -9,7 +9,7 @@
 
 	//%231f2937
 
-	export let color = 'shapedividers_com-1603';
+	let { color = 'shapedividers_com-1603' } = $props();
 </script>
 
 <div class="{color} h-32 dark:block bg-white dark:bg-transparent"></div>

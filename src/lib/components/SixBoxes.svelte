@@ -2,12 +2,11 @@
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 
-	export let boxesContent = [];
+	let { boxesContent = [] } = $props();
 
 	let boxesContainer;
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
 
@@ -74,11 +73,12 @@
 
 		<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			{#each boxesContent as box}
+				{@const Component = box.component}
 				<a
 					class="box-item block rounded-xl border dark:border-gray-800 p-8 shadow-xl dark:hover:border-[#23B7E5] dark:hover:shadow-[#23B7E5] hover:shadow-[#3a9ac7]/50"
 					href={box.href}
 				>
-					<svelte:component this={box.component} size={36} color="#23B7E5" />
+					<Component size={36} color="#23B7E5" />
 
 					<h3 class="text-xl font-bold mb-2">{box.title}</h3>
 

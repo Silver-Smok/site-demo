@@ -1,12 +1,14 @@
 <script>
-	export let title;
-	export let texte;
-	export let src;
-	export let pdf = {};
-	export let downloadLink;
-	export let dl2;
-	export let textDl1;
-	export let textDl2;
+	let {
+		title,
+		texte,
+		src,
+		pdf = {},
+		downloadLink,
+		dl2,
+		textDl1,
+		textDl2
+	} = $props();
 </script>
 
 <section class="flex flex-col gap-10 justify-center items-center p-10">

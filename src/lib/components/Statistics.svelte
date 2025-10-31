@@ -2,7 +2,7 @@
     import {inview} from 'svelte-inview';
     import  { fade } from 'svelte/transition';
 
-    let percentage = 0;
+    let percentage = $state(0);
   
     function increasePercentage() {
       percentage += 1;
@@ -19,5 +19,5 @@
     </div>
   </div>
   
-  <button on:click={increasePercentage}>Augmenter</button>
+  <button onclick={increasePercentage}>Augmenter</button>
   

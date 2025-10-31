@@ -6,7 +6,6 @@
 	let headingElement;
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
 

@@ -13,7 +13,7 @@
 	</article>
 
 	<article class="xl:w-3/6">
-		<img src="/fonctionalite-banner.jpg" alt="de l'application" />
+		<img src="/fonctionalite-banner.jpg" alt="de l'application" loading="lazy" decoding="async" />
 	</article>
 </section>
 

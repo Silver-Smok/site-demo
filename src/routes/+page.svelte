@@ -12,7 +12,6 @@
 
 	onMount(() => {
 		// Assurez-vous que le plugin est enregistré
-		gsap.registerPlugin(ScrollTrigger);
 		ScrollTrigger.refresh(); // Nettoyer tous les anciens triggers
 	});
 

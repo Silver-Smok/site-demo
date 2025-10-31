@@ -1,5 +1,6 @@
 <script>
-	export let plans = [
+	let {
+		plans = [
 		{
 			title: 'Standard Individuel',
 			price: 49,
@@ -80,7 +81,8 @@
 				href: '#'
 			}
 		}
-	];
+	]
+	} = $props();
 </script>
 
 <article class="flex justify-evenly flex-wrap py-5">

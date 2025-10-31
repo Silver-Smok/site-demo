@@ -96,7 +96,7 @@
 			</a>
 
 			<button
-				on:click={() => history.back()}
+				onclick={() => history.back()}
 				class="inline-flex items-center gap-2 px-8 py-4 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold rounded-lg shadow hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all duration-200"
 			>
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

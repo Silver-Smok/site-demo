@@ -8,7 +8,6 @@
 	onMount(() => {
 		if (!paragraphElement) return;
 		
-		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
 

@@ -17,10 +17,16 @@ export default defineConfig({
 		include: [
 			'gsap',
 			'gsap/ScrollTrigger',
-			'gsap/Draggable'
+			'gsap/Draggable',
+			'sveltekit-superforms',
+			'devalue',
+			'ts-deepmerge',
+			'@vercel/analytics',
+			'@vercel/speed-insights',
+			'zod',
+			'svelte-inview'
 		],
 		exclude: [
-			'@tabler/icons-svelte',
 			'@skeletonlabs/skeleton'
 		]
 	},

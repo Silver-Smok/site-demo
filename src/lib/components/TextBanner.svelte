@@ -4,18 +4,19 @@
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import { onMount } from 'svelte';
 
+	let {
+		header = {
+			title: 'Une application ergonomique et sécurisée',
+			content:
+				"Lorsque nous avons créé notre application, l'ergonomie et la sécurité ont été nos priorités absolues. Nous savons que nos utilisateurs attendent une expérience fluide et instinctive, mais ils doivent également se sentir en sécurité lorsqu'ils l'utilisent. Nous avons donc conçu une interface simple et intuitive qui permet à chacun de naviguer dans l'application sans effort."
+		}
+	} = $props();
+
 	let color = 'shapedividers_com-1602';
 	let gearIcon;
 	let sectionElement;
 
-	export let header = {
-		title: 'Une application ergonomique et sécurisée',
-		content:
-			"Lorsque nous avons créé notre application, l'ergonomie et la sécurité ont été nos priorités absolues. Nous savons que nos utilisateurs attendent une expérience fluide et instinctive, mais ils doivent également se sentir en sécurité lorsqu'ils l'utilisent. Nous avons donc conçu une interface simple et intuitive qui permet à chacun de naviguer dans l'application sans effort."
-	};
-
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 
 		// Première animation : entrée avec rotation et déplacement
 		gsap.fromTo(gearIcon,{

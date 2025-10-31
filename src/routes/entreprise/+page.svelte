@@ -26,8 +26,6 @@
 	};
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
-
 		// Animation du titre - slide depuis le haut avec fade
 		gsap.from(titleElement, {
 			opacity: 0,
@@ -213,6 +211,8 @@
 					class="w-full max-w-[550px] h-auto mx-auto"
 					src="/Mafrit.jpg"
 					alt="Mossadegh AFRIT - Président Directeur Général"
+					loading="lazy"
+					decoding="async"
 				/>
 			</div>
 		</article>
@@ -320,6 +320,8 @@
 						class="w-full max-w-md aspect-square object-cover rounded-full"
 						src="erp.jpg"
 						alt=""
+					loading="lazy"
+					decoding="async"
 					/>
 				</div>
 			</div>

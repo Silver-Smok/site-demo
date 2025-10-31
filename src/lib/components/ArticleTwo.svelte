@@ -3,13 +3,11 @@
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 	import ButtonOne from './ButtonOne.svelte';
 
-	export let obj = {};
-	export let buttonAttributs = {};
-	
+	let { obj = {}, buttonAttributs = {} } = $props();
+
 	let articleSection;
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 
 		const triggers = [];
 
@@ -64,7 +62,7 @@
 			<div
 				class="article-image relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full shadow-[#0565be]/50 shadow-xl"
 			>
-				<img alt={obj.alt} src={obj.src} class="absolute inset-0 h-full w-full" />
+				<img alt={obj.alt} src={obj.src} loading="lazy" decoding="async" class="absolute inset-0 h-full w-full" />
 			</div>
 
 			<div class="article-content lg:py-24">
