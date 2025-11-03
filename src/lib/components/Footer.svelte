@@ -9,11 +9,17 @@
 <footer class="bg-white dark:bg-gray-800">
 	<div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
 		<div class="md:flex md:justify-between">
-			<div class="mb-6 md:mb-0">
+			<div class="mb-6 md:mb-0 flex justify-between items-center w-full">
 				<a href="/" class="flex items-center">
 					<img src="/notif-logo.png" class="h-8 me-3" alt="SilverStock Logo" />
 					<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SilverStock</span>
 				</a>
+				<div class="coucou w-32 hidden dark:block">
+					<img src="/nf525_fra.png" alt="" srcset="">
+				</div>
+				<div class="coucou w-32 dark:hidden">
+					<img src="/nf.png" alt="" srcset="">
+				</div>
 			</div>
 			<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
 				<!-- Sections commentées conservées pour usage futur -->
