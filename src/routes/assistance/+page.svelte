@@ -33,6 +33,11 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Assistance - SilverStock</title>
+	<meta name="description" content="Besoin d'aide avec SilverStock ? Consultez nos guides d'installation, configuration et utilisation." />
+</svelte:head>
+
 <!-- svelte-ignore missing-declaration -->
 <main class="dark:bg-gray-900 dark:text-white shadow-lg dark:shadow-white">
 	<ThreeIcons header={header3icons} iconsTab={tabIcons} />

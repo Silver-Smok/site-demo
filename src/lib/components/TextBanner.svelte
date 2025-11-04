@@ -1,20 +1,64 @@
 <script>
 	import SvGdivider from './SVGdivider.svelte';
 	import SvGdividerBottom from './SVGdividerBottom.svelte';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
+	import { onMount } from 'svelte';
+
+	let {
+		header = {
+			title: 'Une application ergonomique et sécurisée',
+			content:
+				"Lorsque nous avons créé notre application, l'ergonomie et la sécurité ont été nos priorités absolues. Nous savons que nos utilisateurs attendent une expérience fluide et instinctive, mais ils doivent également se sentir en sécurité lorsqu'ils l'utilisent. Nous avons donc conçu une interface simple et intuitive qui permet à chacun de naviguer dans l'application sans effort."
+		}
+	} = $props();
 
 	let color = 'shapedividers_com-1602';
-	export let header = {
-		title: 'Une application ergonomique et sécurisée',
-		content:
-			"Lorsque nous avons créé notre application, l'ergonomie et la sécurité ont été nos priorités absolues. Nous savons que nos utilisateurs attendent une expérience fluide et instinctive, mais ils doivent également se sentir en sécurité lorsqu'ils l'utilisent. Nous avons donc conçu une interface simple et intuitive qui permet à chacun de naviguer dans l'application sans effort."
-	};
+	let gearIcon;
+	let sectionElement;
+
+	onMount(() => {
+
+		// Première animation : entrée avec rotation et déplacement
+		gsap.fromTo(gearIcon,{
+			rotation: 0,
+			x:'100vw',
+			y:'-100vh',
+		},
+		 {
+			rotation: 760,
+			x:0,
+			y:0,
+			ease: 'none',
+			scrollTrigger: {
+				trigger: sectionElement,
+				start: 'top bottom',
+				end: 'top 50%',
+				scrub: 1,
+				id: 'gear-entry'
+			}
+		});
+
+		// Deuxième animation : rotation continue jusqu'à la fin de la section
+		gsap.to(gearIcon, {
+			rotation: '+=720', // 2 tours complets supplémentaires
+			ease: 'none',
+			scrollTrigger: {
+				trigger: sectionElement,
+				start: 'top 50%', // Commence où la première se termine
+				end: 'bottom top',
+				scrub: 1,
+				id: 'gear-continue'
+			}
+		});
+	});
 </script>
 
-<section class="py-28">
+<section class="py-28 overflow-x-hidden" bind:this={sectionElement}>
 	<SvGdividerBottom {color} />
-	<article class="bg-black text-gray-100 flex items-center justify-center flex-col md:flex-row">
-		<div class="w-2/6 flex justify-center">
+	<article class="bg-black text-gray-100 flex items-center justify-center flex-col md:flex-row overflow-hidden">
+		<div class="w-1/3 md:w-2/6 flex justify-center z-10">
 			<svg
+				bind:this={gearIcon}
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				viewBox="0 0 24 24"

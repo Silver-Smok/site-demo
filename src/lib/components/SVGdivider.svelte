@@ -1,5 +1,5 @@
-<div class="bg-black h-20" />
-<div class="shapedividers_com-9653 h-28" />
+<div class="bg-black h-20"></div>
+<div class="shapedividers_com-9653 h-28"></div>
 
 <style>
 	.shapedividers_com-9653 {

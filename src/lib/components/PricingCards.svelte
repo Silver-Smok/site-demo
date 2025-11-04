@@ -1,7 +1,6 @@
 <script>
-	import { Card, Button } from 'flowbite-svelte';
-
-	export let plans = [
+	let {
+		plans = [
 		{
 			title: 'Standard Individuel',
 			price: 49,
@@ -82,12 +81,13 @@
 				href: '#'
 			}
 		}
-	];
+	]
+	} = $props();
 </script>
 
 <article class="flex justify-evenly flex-wrap py-5">
 	{#each plans as plan}
-		<Card padding="xl" class="mb-5">
+		<div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mb-5">
 			<h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">{plan.title}</h5>
 			<div class="flex items-baseline text-gray-900 dark:text-white">
 				<span class="text-5xl font-extrabold tracking-tight">{plan.price}</span>
@@ -136,7 +136,7 @@
 					</li>
 				{/each}
 			</ul>
-			<Button class="w-full">Choose plan</Button>
-		</Card>
+			<button type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Choose plan</button>
+		</div>
 	{/each}
 </article>

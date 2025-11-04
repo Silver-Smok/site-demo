@@ -5,5 +5,45 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: 'modern-compiler'
+			}
+		}
+	},
+	optimizeDeps: {
+		include: [
+			'gsap',
+			'gsap/ScrollTrigger',
+			'gsap/Draggable',
+			'sveltekit-superforms',
+			'devalue',
+			'ts-deepmerge',
+			'@vercel/analytics',
+			'@vercel/speed-insights',
+			'zod',
+			'svelte-inview'
+		],
+		exclude: [
+			'@skeletonlabs/skeleton'
+		]
+	},
+	server: {
+		watch: {
+			ignored: [
+				'**/static/pdf/**',
+				'**/static/videos/**',
+				'**/.svelte-kit/**',
+				'**/node_modules/**'
+			]
+		},
+		fs: {
+			strict: true
+		}
+	},
+	ssr: {
+		noExternal: ['sveltekit-superforms']
 	}
 });

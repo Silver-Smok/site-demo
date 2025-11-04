@@ -1,11 +1,22 @@
 <script>
 	import Cta from '$lib/components/CTA.svelte';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
+	import { onMount } from 'svelte';
+
+	let titleElement;
+	let paragraphs;
+	let founderImage;
+	let erpTitle;
+	let erpBars;
+	let analyticsCard;
+	let managementCard;
+	let erpImage;
 
 	let presentation = {
 		title: "SilverStock, qu'est-ce que c'est ?",
 		content:
 			"Issue d'un travail mené depuis 2015, l'application SilverStock est aujourd'hui à son stade le plus abouti et le plus fonctionnel. Développée par la synergie créée lors de brainstorming hebdomadaires entre les différents acteurs de deux entreprises de cigarette électronique (équipes de ventes, préparateurs de commandes, responsables des achats, pôle managérial...) et l'équipe de développement, ce projet s'est inscrit dans la modernisation de nos outils de gestion, jusqu'à en devenir un élément central et essentiel, nous ayant permis de nous démarquer des autres entreprises du secteur.",
-		src: '/iconSilverBig.webp',
+		src: 'Silver Stock-512x512.png',
 		alt: 'Vente'
 	};
 
@@ -13,7 +24,142 @@
 		href: '/contact',
 		text: "Commencez aujourd'hui"
 	};
+
+	onMount(() => {
+		// Animation du titre - slide depuis le haut avec fade
+		gsap.from(titleElement, {
+			opacity: 0,
+			y: -50,
+			duration: 1,
+			ease: 'power3.out',
+			scrollTrigger: {
+				trigger: titleElement,
+				start: 'top 85%',
+				toggleActions: 'play none none none'
+			}
+		});
+
+		// Animation des paragraphes - apparition en cascade
+		gsap.from(paragraphs.children, {
+			opacity: 0,
+			y: 30,
+			duration: 0.8,
+			stagger: 0.15,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: paragraphs,
+				start: 'top 80%',
+				toggleActions: 'play none none none'
+			}
+		});
+
+		// Animation de l'image du fondateur - zoom et rotation avec parallax
+		gsap.from(founderImage, {
+			opacity: 0,
+			scale: 0.7,
+			rotation: -8,
+			duration: 1.2,
+			ease: 'back.out(1.7)',
+			scrollTrigger: {
+				trigger: founderImage,
+				start: 'top 85%',
+				toggleActions: 'play none none none'
+			}
+		});
+
+		// Effet parallax sur l'image pendant le scroll
+		gsap.to(founderImage, {
+			y: -50,
+			ease: 'none',
+			scrollTrigger: {
+				trigger: founderImage,
+				start: 'top bottom',
+				end: 'bottom top',
+				scrub: 1.5
+			}
+		});
+
+		// === ANIMATIONS SECTION ERP/CRM ===
+
+		// Animation du titre ERP/CRM - slide depuis la gauche
+		gsap.from(erpTitle, {
+			opacity: 0,
+			x: -100,
+			duration: 1,
+			ease: 'power3.out',
+			scrollTrigger: {
+				trigger: erpTitle,
+				start: 'top 80%',
+				toggleActions: 'play none none none'
+			}
+		});
+
+		// Animation des barres décoratives - croissance progressive
+		gsap.from(erpBars.children, {
+			width: 0,
+			duration: 1,
+			stagger: 0.15,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: erpBars,
+				start: 'top 80%',
+				toggleActions: 'play none none none'
+			}
+		});
+
+		// Animation de la carte Analytics - slide depuis la gauche
+		gsap.from(analyticsCard, {
+			opacity: 0,
+			x: -80,
+			duration: 0.8,
+			ease: 'power3.out',
+			scrollTrigger: {
+				trigger: analyticsCard,
+				start: 'top 85%',
+				toggleActions: 'play none none none'
+			}
+		});
+
+		// Animation de la carte Management - slide depuis la gauche avec délai
+		gsap.from(managementCard, {
+			opacity: 0,
+			x: -80,
+			duration: 0.8,
+			delay: 0.2,
+			ease: 'power3.out',
+			scrollTrigger: {
+				trigger: managementCard,
+				start: 'top 85%',
+				toggleActions: 'play none none none'
+			}
+		});
+
+		// Animation de l'image ERP - apparition avec scale progressive au scroll
+		gsap.fromTo(erpImage, 
+			{
+				opacity: 0,
+				scale: 0.5
+			},
+			{
+				opacity: 1,
+				scale: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: erpImage,
+					start: 'top 90%',
+					end: 'top 50%',
+					scrub: 1.5,
+					toggleActions: 'play none none none'
+				}
+			}
+		);
+	});
 </script>
+
+<svelte:head>
+	<title>Notre Histoire - SilverStock</title>
+	<meta name="description" content="Découvrez l'histoire de SilverStock, une solution logicielle innovante développée depuis 2015 pour moderniser la gestion d'entreprise." />
+</svelte:head>
 
 <header class="dark:bg-gray-900 dark:text-white shadow-lg dark:shadow-white">
 	<div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
@@ -21,16 +167,15 @@
 	</div>
 </header>
 <main class="dark:bg-gray-900 dark:text-white shadow-lg dark:shadow-white">
-	<section class="flex justify-center py-32 shadow">
-		<article class=" flex w-5/6 items-center justify-evenly flex-wrap">
-			<div class="flex flex-col gap-20 md:w-3/6">
+	<section class="flex justify-center py-8 md:py-16 lg:py-32 shadow">
+		<article class=" flex w-11/12 md:w-5/6 items-center justify-evenly flex-wrap gap-8 md:gap-0">
+			<div class="flex flex-col gap-8 md:gap-12 lg:gap-20 w-full md:w-3/6">
 				<div class="flex flex-col gap-5">
-					<!-- <h2 class="text-2xl self-center">Notre Mission</h2> -->
-					<h3 class="text-3xl self-center">
+					<h3 bind:this={titleElement} class="text-2xl md:text-3xl self-center">
 						Une Solution Logicielle Innovante pour Entreprises Modernes
 					</h3>
 				</div>
-				<div class=" flex flex-col gap-5">
+				<div bind:this={paragraphs} class=" flex flex-col gap-5">
 					<p>
 						Silver Stock est une entreprise innovante et en pleine croissance, spécialisée dans la
 						création de solutions logicielles pour les entreprises. Fondée en 2014, nous avons
@@ -60,11 +205,14 @@
 					</p>
 				</div>
 			</div>
-			<div class="py-5">
+			<div class="py-5 w-full md:w-auto px-4 md:px-0">
 				<img
-					class="max-w-[550px]"
-					src="/Mafrite.jpg"
+					bind:this={founderImage}
+					class="w-full max-w-[550px] h-auto mx-auto"
+					src="/Mafrit.jpg"
 					alt="Mossadegh AFRIT - Président Directeur Général"
+					loading="lazy"
+					decoding="async"
 				/>
 			</div>
 		</article>
@@ -72,26 +220,25 @@
 
 	<Cta buttonAttributs={buttonCta} tabCTA={presentation} />
 
-	<!-- component -->
 	<section class="bg-white dark:bg-gray-900">
-		<div class="container px-6 py-10 mx-auto">
-			<hr class="border-gray-200 my-12 dark:border-gray-700" />
+		<div class="container px-4 sm:px-6 py-10 mx-auto">
+			<hr class="border-gray-200 my-8 md:my-12 dark:border-gray-700" />
 
-			<div class="lg:flex lg:items-center py-10">
-				<div class="w-full space-y-12 lg:w-1/2">
+			<div class="lg:flex lg:items-center py-6 md:py-10 gap-8">
+				<div class="w-full space-y-8 md:space-y-12 lg:w-1/2">
 					<div>
-						<h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
+						<h1 bind:this={erpTitle} class="text-2xl md:text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
 							Une application <br /> ERP / CRM
 						</h1>
 
-						<div class="mt-2">
-							<span class="inline-block w-40 h-1 rounded-full bg-blue-500" />
-							<span class="inline-block w-3 h-1 ml-1 rounded-full bg-blue-500" />
-							<span class="inline-block w-1 h-1 ml-1 rounded-full bg-blue-500" />
+						<div bind:this={erpBars} class="mt-2">
+							<span class="inline-block w-40 h-1 rounded-full bg-blue-500"></span>
+							<span class="inline-block w-3 h-1 ml-1 rounded-full bg-blue-500"></span>
+							<span class="inline-block w-1 h-1 ml-1 rounded-full bg-blue-500"></span>
 						</div>
 					</div>
 
-					<div class="md:flex md:items-start md:-mx-4">
+					<div bind:this={analyticsCard} class="md:flex md:items-start md:-mx-4">
 						<span
 							class="inline-block p-2 text-blue-500 bg-blue-100 rounded-xl md:mx-4 dark:text-white dark:bg-blue-500"
 						>
@@ -128,7 +275,7 @@
 						</div>
 					</div>
 
-					<div class="md:flex md:items-start md:-mx-4">
+					<div bind:this={managementCard} class="md:flex md:items-start md:-mx-4">
 						<span
 							class="inline-block p-2 text-blue-500 bg-blue-100 rounded-xl md:mx-4 dark:text-white dark:bg-blue-500"
 						>
@@ -167,16 +314,19 @@
 					</div>
 				</div>
 
-				<div class="hidden lg:flex lg:items-center lg:w-1/2 lg:justify-center">
+				<div class="hidden md:flex lg:items-center lg:w-1/2 lg:justify-center mt-8 lg:mt-0 px-4">
 					<img
-						class="w-[28rem] h-[28rem] object-cover xl:w-[34rem] xl:h-[34rem] rounded-full"
-						src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=755&q=80"
+						bind:this={erpImage}
+						class="w-full max-w-md aspect-square object-cover rounded-full"
+						src="erp.jpg"
 						alt=""
+					loading="lazy"
+					decoding="async"
 					/>
 				</div>
 			</div>
 
-			<hr class="border-gray-200 my-12 dark:border-gray-700" />
+			<hr class="border-gray-200 my-8 md:my-12 dark:border-gray-700" />
 		</div>
 	</section>
 </main>

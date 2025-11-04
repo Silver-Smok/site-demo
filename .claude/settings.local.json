@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(taskkill //F //PID 14104)",
+      "Bash(npm view:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm run build:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "svelte"
+  ]
+}

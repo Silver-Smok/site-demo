@@ -7,6 +7,13 @@
 	import Cta from '$lib/components/CTA.svelte';
 	import LeftCta from '$lib/components/LeftCTA.svelte';
 	import TextBanner from '../lib/components/TextBanner.svelte';
+	import { gsap, ScrollTrigger } from '$lib/gsap';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		// Assurez-vous que le plugin est enregistré
+		ScrollTrigger.refresh(); // Nettoyer tous les anciens triggers
+	});
 
 	let header3icons = {
 		title: 'Gérez votre commerce en toute simplicité',
@@ -73,16 +80,21 @@
 	};
 </script>
 
-<div class="dark:text-white dark:bg-gray-900">
+<svelte:head>
+	<title>SilverStock - Solution de gestion pour commerces</title>
+	<meta name="description" content="SilverStock est une application de gestion complète pour votre commerce : caisse enregistreuse en ligne, gestion des stocks, statistiques en temps réel et bien plus." />
+</svelte:head>
+
+<div class="dark:text-white dark:bg-gray-900 overflow-x-hidden">
 	<HomeBanners />
 	<SectionImgRight />
 	<SVGdivider />
 	<ThreeIcons header={header3icons} iconsTab={tabIcons} />
-	<div id="stock" />
+	<div id="stock"></div>
 	<Cta tabCTA={ctaStocks} buttonAttributs={buttonCta} />
-	<div id="info" />
+	<div id="info"></div>
 	<LeftCta />
-	<div id="ventes" />
+	<div id="ventes"></div>
 	<Cta tabCTA={ctaVentes} buttonAttributs={buttonCta} />
 	<TextBanner />
 	<ArticleTwo obj={communication} buttonAttributs={buttonCom} />

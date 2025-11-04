@@ -2,9 +2,9 @@
 	<div class="container">
 		<div class="p-10">
 			<div class="animation">
-				<div class="one spin-one" />
-				<div class="two spin-two" />
-				<div class="three spin-one" />
+				<div class="one spin-one"></div>
+				<div class="two spin-two"></div>
+				<div class="three spin-one"></div>
 			</div>
 			<h1>TUTORIEL EN COURS D'ÉLABORATION</h1>
 			<p>Ce tutoriel sera disponnible sous peu.</p>

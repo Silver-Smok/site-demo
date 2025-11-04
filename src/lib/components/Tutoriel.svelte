@@ -1,12 +1,14 @@
 <script>
-	export let title;
-	export let texte;
-	export let src;
-	export let pdf = {};
-	export let downloadLink;
-	export let dl2;
-	export let textDl1;
-	export let textDl2;
+	let {
+		title,
+		texte,
+		src,
+		pdf = {},
+		downloadLink,
+		dl2,
+		textDl1,
+		textDl2
+	} = $props();
 </script>
 
 <section class="flex flex-col gap-10 justify-center items-center p-10">
@@ -22,7 +24,7 @@
 				frameborder="0"
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 				allowfullscreen
-			/>
+			></iframe>
 		</article>
 	{/if}
 	{#if pdf}
@@ -34,7 +36,7 @@
 		</article>
 		<article>
 			<a
-				class="inline-block rounded bg-[#BE0562] px-12 py-3 text-sm font-medium text-white transition hover:bg-[#2594E4] focus:outline-none focus:ring focus:ring-yellow-400"
+				class="inline-block rounded bg-[#2594E4] px-12 py-3 text-sm font-medium text-white transition hover:bg-[#2528e4] focus:outline-none focus:ring focus:ring-yellow-400"
 				href={pdf.link}
 				download={pdf.fileName}
 				rel="noopener noreferrer"
@@ -50,7 +52,7 @@
 					<p>{textDl1}</p>
 				{/if}
 				<a
-					class="inline-block rounded bg-[#BE0562] px-12 py-3 text-sm font-medium text-white transition hover:bg-[#2594E4] focus:outline-none focus:ring focus:ring-yellow-400"
+					class="inline-block rounded bg-[#2594E4] px-12 py-3 text-sm font-medium text-white transition hover:bg-[#2528e4] focus:outline-none focus:ring focus:ring-yellow-400"
 					href={downloadLink}
 					rel="noopener noreferrer"
 				>
@@ -63,7 +65,7 @@
 				<p>{textDl2}</p>
 				<a
 					href={dl2}
-					class=" self-end inline-block rounded bg-[#BE0562] px-12 py-3 text-sm font-medium text-white transition hover:bg-[#2594E4] focus:outline-none focus:ring focus:ring-yellow-400"
+					class=" self-end inline-block rounded bg-[#2594E4] px-12 py-3 text-sm font-medium text-white transition hover:bg-[#2528e4] focus:outline-none focus:ring focus:ring-yellow-400"
 					rel="noopener noreferrer"
 				>
 					Téléchargez l'application
