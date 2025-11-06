@@ -2,7 +2,7 @@
 	import SvGdividerBottom from './SVGdividerBottom.svelte';
 </script>
 
-<div class="dark:bg-gray-900">
+<div class="dark:bg-gray-900 hidden dark:block">
 	<SvGdividerBottom />
 </div>
 
