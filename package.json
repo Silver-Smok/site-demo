@@ -43,6 +43,8 @@
 		"@vercel/speed-insights": "^1.2.0",
 		"gsap": "^3.13.0",
 		"mailgun.js": "^12.1.0",
+		"overlayscrollbars": "^2.13.0",
+		"overlayscrollbars-svelte": "^0.5.5",
 		"svelte-inview": "^4.0.4"
 	}
 }
