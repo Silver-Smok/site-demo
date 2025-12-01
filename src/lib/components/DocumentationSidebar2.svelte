@@ -210,7 +210,7 @@
 
 	/* Custom OverlayScrollbars theme - utilise les bons sélecteurs */
 	:global(.os-theme-custom.os-scrollbar) {
-		--os-size: 8px;
+		--os-size: 12px;
 		--os-padding-perpendicular: 2px;
 		--os-padding-axis: 2px;
 		--os-track-border-radius: 0px;

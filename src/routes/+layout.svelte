@@ -12,7 +12,9 @@
 
 <Nav />
 
-{@render children()}
+<div class="pt-16">
+	{@render children()}
+</div>
 
 {#if showFooter}
 	<Footer />
