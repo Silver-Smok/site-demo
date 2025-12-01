@@ -2,10 +2,13 @@
 	import { page } from '$app/stores';
 	import { OverlayScrollbarsComponent } from 'overlayscrollbars-svelte';
 	import 'overlayscrollbars/overlayscrollbars.css';
+	import { onMount } from 'svelte';
 
 	let { navigation } = $props();
 	let sidebarOpen = $state(true);
+	let mobileMenuOpen = $state(false);
 	let expandedSections = $state(new Set());
+	let isMobile = $state(false);
 
 	// Configuration OverlayScrollbars
 	const scrollbarOptions = {
@@ -55,32 +58,98 @@
 			return false;
 		});
 	}
+
+	// Detect mobile viewport
+	onMount(() => {
+		const checkMobile = () => {
+			isMobile = window.innerWidth < 1024; // lg breakpoint
+			if (isMobile) {
+				sidebarOpen = false;
+				mobileMenuOpen = false;
+			} else {
+				sidebarOpen = true;
+				mobileMenuOpen = false;
+			}
+		};
+
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+
+		return () => window.removeEventListener('resize', checkMobile);
+	});
+
+	// Close mobile menu when clicking a link
+	function handleLinkClick() {
+		if (isMobile) {
+			mobileMenuOpen = false;
+		}
+	}
 </script>
 
+<!-- Mobile menu button (hamburger) -->
+{#if isMobile}
+	<button
+		onclick={() => mobileMenuOpen = !mobileMenuOpen}
+		class="fixed top-20 left-4 z-50 p-3 bg-gradient-to-r from-[#2594E4] to-[#2528e4] text-white rounded-lg shadow-lg lg:hidden hover:shadow-xl transition-all"
+		aria-label="Toggle menu"
+	>
+		<svg
+			class="w-6 h-6 transition-transform duration-300 {mobileMenuOpen ? 'rotate-90' : ''}"
+			fill="none"
+			stroke="currentColor"
+			viewBox="0 0 24 24"
+		>
+			{#if mobileMenuOpen}
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+			{:else}
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+			{/if}
+		</svg>
+	</button>
+{/if}
+
+<!-- Overlay backdrop for mobile -->
+{#if isMobile && mobileMenuOpen}
+	<div
+		role="button"
+		tabindex="0"
+		class="fixed inset-0 bg-black/50 z-40 lg:hidden"
+		onclick={() => mobileMenuOpen = false}
+		onkeydown={(e) => e.key === 'Escape' && (mobileMenuOpen = false)}
+		aria-label="Fermer le menu"
+	></div>
+{/if}
+
 <aside
-	class="transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 border-r border-gray-300 dark:border-gray-700 shadow-lg {sidebarOpen ? 'w-72' : 'w-14'} flex-shrink-0"
+	class="transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 border-r border-gray-300 dark:border-gray-700 shadow-lg
+		{isMobile
+			? `fixed top-16 left-0 bottom-0 z-40 w-80 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`
+			: `flex-shrink-0 ${sidebarOpen ? 'w-72' : 'w-14'}`
+		}"
 >
-	<div class="sticky top-16 h-[calc(100vh-4rem)] flex flex-col">
-		<!-- Header with toggle -->
+	<div class="{isMobile ? 'h-full' : 'sticky top-16 h-[calc(100vh-4rem)]'} flex flex-col">
+		<!-- Header with toggle (desktop only) -->
 		<div class="p-3 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-[#2594E4] to-[#2528e4]">
 			<div class="flex items-center justify-between">
-				{#if sidebarOpen}
+				{#if sidebarOpen || isMobile}
 					<h2 class="text-sm font-bold text-white tracking-wide">DOCUMENTATION</h2>
 				{/if}
-				<button
-					onclick={() => sidebarOpen = !sidebarOpen}
-					class="p-1.5 rounded-md bg-white/20 hover:bg-white/30 transition-all duration-200 {sidebarOpen ? '' : 'mx-auto'}"
-					title={sidebarOpen ? 'Réduire' : 'Agrandir'}
-				>
-					<svg
-						class="w-4 h-4 text-white transition-transform duration-300 {sidebarOpen ? '' : 'rotate-180'}"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
+				{#if !isMobile}
+					<button
+						onclick={() => sidebarOpen = !sidebarOpen}
+						class="p-1.5 rounded-md bg-white/20 hover:bg-white/30 transition-all duration-200 {sidebarOpen ? '' : 'mx-auto'}"
+						title={sidebarOpen ? 'Réduire' : 'Agrandir'}
 					>
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-					</svg>
-				</button>
+						<svg
+							class="w-4 h-4 text-white transition-transform duration-300 {sidebarOpen ? '' : 'rotate-180'}"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+						</svg>
+					</button>
+				{/if}
 			</div>
 		</div>
 
@@ -91,14 +160,14 @@
 			options={scrollbarOptions}
 			defer
 		>
-			{#if sidebarOpen}
+			{#if sidebarOpen || isMobile}
 				<nav class="space-y-1">
 					{#each navigation as section, sectionIdx}
 						<div class="mb-3">
 							<!-- Section header - collapsible -->
 							<button
 								onclick={() => toggleSection(`section-${sectionIdx}`)}
-								class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all group"
+								class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all group active:scale-95"
 							>
 								<span class="flex items-center gap-2">
 									<div class="w-2 h-2 rounded-full bg-{section.color}-500"></div>
@@ -120,7 +189,8 @@
 										{#if item.url}
 											<a
 												href={item.url}
-												class="block px-3 py-1.5 text-sm rounded-md transition-all {isActiveUrl(item.url)
+												onclick={handleLinkClick}
+												class="block px-3 py-2 text-sm rounded-md transition-all active:scale-95 {isActiveUrl(item.url)
 													? 'bg-gradient-to-r from-[#2594E4] to-[#2528e4] text-white font-medium shadow-sm'
 													: 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:pl-4'}"
 											>
@@ -138,7 +208,8 @@
 															{#if subitem.url}
 																<a
 																	href={subitem.url}
-																	class="block px-2 py-1 text-xs rounded-md transition-all {isActiveUrl(subitem.url)
+																	onclick={handleLinkClick}
+																	class="block px-2 py-2 text-xs rounded-md transition-all active:scale-95 {isActiveUrl(subitem.url)
 																		? 'bg-[#2594E4] text-white font-medium'
 																		: 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-[#2594E4] dark:hover:text-[#2594E4]'}"
 																>
@@ -155,7 +226,8 @@
 																			{#each subitem.children as nesteditem}
 																				<a
 																					href={nesteditem.url}
-																					class="block px-2 py-1 text-xs rounded-md transition-all {isActiveUrl(nesteditem.url)
+																					onclick={handleLinkClick}
+																					class="block px-2 py-2 text-xs rounded-md transition-all active:scale-95 {isActiveUrl(nesteditem.url)
 																						? 'bg-[#2594E4] text-white font-medium'
 																						: 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-[#2594E4]'}"
 																				>
@@ -178,7 +250,7 @@
 					{/each}
 				</nav>
 			{:else}
-				<!-- Collapsed view - just icons/dots -->
+				<!-- Collapsed view - just icons/dots (desktop only) -->
 				<div class="space-y-2 flex flex-col items-center">
 					{#each navigation as section}
 						<div
@@ -191,7 +263,7 @@
 		</OverlayScrollbarsComponent>
 
 		<!-- Footer -->
-		{#if sidebarOpen}
+		{#if sidebarOpen || isMobile}
 			<div class="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
 				<div class="text-xs text-gray-500 dark:text-gray-400 text-center">
 					<span class="font-semibold text-[#2594E4]">SilverStock</span> Docs
