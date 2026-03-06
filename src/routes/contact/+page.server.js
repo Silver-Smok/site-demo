@@ -28,10 +28,9 @@ const newContactSchema = z.object({
 		.max(200)
 		.trim(),
 	nombreBoutiques: z
-		.number({ invalid_type_error: 'Veuillez renseigner un nombre' })
-		.int({ message: 'Veuillez renseigner un nombre entier' })
+		.string()
 		.min(1, { message: 'Veuillez renseigner un nombre de boutiques' })
-		.max(10000),
+		.regex(/^\d+$/, { message: 'Veuillez renseigner un nombre valide' }),
 	email: z
 		.string()
 		.min(1, { message: ' Veuillez rentrer une adresse email' })

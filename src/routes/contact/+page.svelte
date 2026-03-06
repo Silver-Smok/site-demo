@@ -256,11 +256,16 @@
 							<div class="mb-6">
 								<input
 									name="nombreBoutiques"
-									type="number"
+									type="text"
+									inputmode="numeric"
+									pattern="[0-9]*"
 									bind:value={$form.nombreBoutiques}
 									{...constraints.nombreBoutiques}
 									placeholder="Nombre de boutiques"
-									min="1"
+									oninput={(e) => {
+										e.target.value = e.target.value.replace(/[^0-9]/g, '');
+										$form.nombreBoutiques = e.target.value;
+									}}
 									class="
 										w-full
 										rounded
