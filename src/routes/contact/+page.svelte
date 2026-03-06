@@ -10,7 +10,7 @@
 	let formElement; // Le div du formulaire pour le glow
 	let textContainer;
 	let sectionContainer;
-	
+
 	onMount(() => {
 		gsap.registerPlugin(Draggable);
 		// Animation d'apparition de la section
@@ -55,33 +55,37 @@
 					trigger: formElement,
 					// Ne pas permettre le drag depuis les éléments de formulaire
 					dragClickables: false,
-					onClick: function(e) {
+					onClick: function (e) {
 						// Empêcher le drag si on clique sur un input, textarea ou button
 						const target = e.target;
-						if (target.tagName === 'INPUT' || 
-						    target.tagName === 'TEXTAREA' || 
-						    target.tagName === 'BUTTON' ||
-						    target.closest('form')) {
+						if (
+							target.tagName === 'INPUT' ||
+							target.tagName === 'TEXTAREA' ||
+							target.tagName === 'BUTTON' ||
+							target.closest('form')
+						) {
 							return false;
 						}
 					},
-					onPress: function(e) {
+					onPress: function (e) {
 						// Ne pas démarrer le drag si on appuie sur un élément de formulaire
 						const target = e.target;
-						if (target.tagName === 'INPUT' || 
-						    target.tagName === 'TEXTAREA' || 
-						    target.tagName === 'BUTTON') {
+						if (
+							target.tagName === 'INPUT' ||
+							target.tagName === 'TEXTAREA' ||
+							target.tagName === 'BUTTON'
+						) {
 							return false;
 						}
 					},
-					onDragStart: function() {
+					onDragStart: function () {
 						gsap.to(formElement, {
 							scale: 1.05,
 							duration: 0.2,
 							ease: 'power2.out'
 						});
 					},
-					onDragEnd: function() {
+					onDragEnd: function () {
 						gsap.to(formElement, {
 							scale: 1,
 							duration: 0.3,
@@ -124,12 +128,19 @@
 	/>
 </svelte:head>
 
-<section bind:this={sectionContainer} class="dark:bg-gray-900 py-20 lg:py-[120px] overflow-hidden relative z-10 min-h-screen">
+<section
+	bind:this={sectionContainer}
+	class="dark:bg-gray-900 py-20 lg:py-[120px] overflow-hidden relative z-10 min-h-screen"
+>
 	<div class="container mx-auto px-4">
 		<div class="flex flex-wrap items-start gap-8 lg:gap-12">
-			<div class="w-full lg:w-[45%] flex-shrink-0 ">
-				<div bind:this={textContainer} class="max-w-[570px] mb-12 lg:mb-0 " >
-					<span class="block mb-4 text-blue-600 dark:text-blue-400 font-semibold text-sm uppercase tracking-wide"> Contactez Nous </span>
+			<div class="w-full lg:w-[45%] flex-shrink-0">
+				<div bind:this={textContainer} class="max-w-[570px] mb-12 lg:mb-0">
+					<span
+						class="block mb-4 text-blue-600 dark:text-blue-400 font-semibold text-sm uppercase tracking-wide"
+					>
+						Contactez Nous
+					</span>
 					<h2
 						class="
 							dark:text-white
@@ -148,7 +159,6 @@
 						Vous avez des questions ? Vous souhaitez en savoir plus sur nos services ? N'hésitez pas
 						à nous contacter via ce formulaire pour bénéficier d'une démonstration personnalisée.
 					</p>
-		
 				</div>
 			</div>
 			<div class="w-full lg:flex-1 lg:max-w-[550px]">
@@ -165,45 +175,116 @@
 							<img src="/svg/formSvg3.svg" alt="" />
 						</span>
 					</div>
-					
+
 					<!-- FORMULAIRE AU PREMIER PLAN -->
 					<div
 						bind:this={formElement}
 						class="form-glow bg-white relative rounded-lg p-8 sm:p-12 shadow-lg"
 					>
 						<form method="POST" use:enhance>
-						<div class="mb-6">
-							<input
-								name="name"
-								type="text"
-								bind:value={$form.name}
-								{...constraints.name}
-								placeholder="Nom"
-								class="
+							<div class="flex gap-4 mb-6">
+								<div class="flex-1">
+									<input
+										name="nom"
+										type="text"
+										bind:value={$form.nom}
+										{...constraints.nom}
+										placeholder="Nom"
+										class="
+											w-full
+											rounded
+											py-3
+											px-[14px]
+											{$errors.nom ? 'border-red-500' : ''}
+											border border-[f0f0f0]
+											outline-none
+											focus-visible:shadow-none
+											focus:border-primary
+											"
+									/>
+									{#if $errors.nom}
+										<div class="text-red-500 text-sm mt-1">{$errors.nom[0]}</div>
+									{/if}
+								</div>
+								<div class="flex-1">
+									<input
+										name="prenom"
+										type="text"
+										bind:value={$form.prenom}
+										{...constraints.prenom}
+										placeholder="Prénom"
+										class="
+											w-full
+											rounded
+											py-3
+											px-[14px]
+											{$errors.prenom ? 'border-red-500' : ''}
+											border border-[f0f0f0]
+											outline-none
+											focus-visible:shadow-none
+											focus:border-primary
+											"
+									/>
+									{#if $errors.prenom}
+										<div class="text-red-500 text-sm mt-1">{$errors.prenom[0]}</div>
+									{/if}
+								</div>
+							</div>
+							<div class="mb-6">
+								<input
+									name="entiteJuridique"
+									type="text"
+									bind:value={$form.entiteJuridique}
+									{...constraints.entiteJuridique}
+									placeholder="Entité juridique"
+									class="
 										w-full
 										rounded
 										py-3
 										px-[14px]
-										{$errors.name ? 'border-red-500' : ''}
+										{$errors.entiteJuridique ? 'border-red-500' : ''}
 										border border-[f0f0f0]
 										outline-none
 										focus-visible:shadow-none
 										focus:border-primary
 										"
-							/>
-							{#if $errors.name}
-								<div class="text-red-500 text-sm mb-4">{$errors.name[0]}</div>
-							{/if}
-						</div>
-						<small></small>
-						<div class="mb-6">
-							<input
-								name="email"
-								type="email"
-								bind:value={$form.email}
-								{...constraints.email}
-								placeholder="Email"
-								class="
+								/>
+								{#if $errors.entiteJuridique}
+									<div class="text-red-500 text-sm mt-1">{$errors.entiteJuridique[0]}</div>
+								{/if}
+							</div>
+							<div class="mb-6">
+								<input
+									name="nombreBoutiques"
+									type="number"
+									bind:value={$form.nombreBoutiques}
+									{...constraints.nombreBoutiques}
+									placeholder="Nombre de boutiques"
+									min="1"
+									class="
+										w-full
+										rounded
+										py-3
+										px-[14px]
+										{$errors.nombreBoutiques ? 'border-red-500' : ''}
+										border border-[f0f0f0]
+										outline-none
+										focus-visible:shadow-none
+										focus:border-primary
+										"
+								/>
+								{#if $errors.nombreBoutiques}
+									<div class="text-red-500 text-sm mt-1">{$errors.nombreBoutiques[0]}</div>
+								{/if}
+							</div>
+							<div class="mb-6">
+								<input
+									name="email"
+									type="email"
+									bind:value={$form.email}
+									{...constraints.email}
+									placeholder="Email"
+									class="
                         {$errors.email ? 'border-red-500' : ''}
                         w-full
                         rounded
@@ -214,19 +295,19 @@
                         focus-visible:shadow-none
                         focus:border-primary
                         "
-							/>
-							{#if $errors.email}
-								<div class="text-red-500 text-sm mb-4">{$errors.email[0]}</div>
-							{/if}
-						</div>
-						<div class="mb-6">
-							<input
-								name="phone"
-								type="text"
-								bind:value={$form.phone}
-								{...constraints.phone}
-								placeholder="Téléphone"
-								class="
+								/>
+								{#if $errors.email}
+									<div class="text-red-500 text-sm mb-4">{$errors.email[0]}</div>
+								{/if}
+							</div>
+							<div class="mb-6">
+								<input
+									name="phone"
+									type="text"
+									bind:value={$form.phone}
+									{...constraints.phone}
+									placeholder="Téléphone"
+									class="
                         w-full
                         rounded
                         py-3
@@ -238,19 +319,19 @@
                         focus-visible:shadow-none
                         focus:border-primary
                         "
-							/>
-							{#if $errors.phone}
-								<div class="text-red-500 text-sm mb-4">{$errors.phone}</div>
-							{/if}
-						</div>
-						<div class="mb-6">
-							<textarea
-								name="message"
-								rows="6"
-								bind:value={$form.message}
-								{...constraints.message}
-								placeholder="Votre Message"
-								class="
+								/>
+								{#if $errors.phone}
+									<div class="text-red-500 text-sm mb-4">{$errors.phone}</div>
+								{/if}
+							</div>
+							<div class="mb-6">
+								<textarea
+									name="message"
+									rows="6"
+									bind:value={$form.message}
+									{...constraints.message}
+									placeholder="Votre Message"
+									class="
                         w-full
                         rounded
                         py-3
@@ -263,15 +344,15 @@
                         focus-visible:shadow-none
                         focus:border-primary
                         "
-							></textarea>
-							{#if $errors.message}
-								<div class="text-red-500 text-sm mb-4">{$errors.message}</div>
-							{/if}
-						</div>
-						<div>
-							<button
-								type="submit"
-								class="
+								></textarea>
+								{#if $errors.message}
+									<div class="text-red-500 text-sm mb-4">{$errors.message}</div>
+								{/if}
+							</div>
+							<div>
+								<button
+									type="submit"
+									class="
                         w-full
                         bg-[#3056D3]
                         text-white
@@ -281,11 +362,11 @@
                         transition
                         hover:bg-opacity-90
                         "
-							>
-								Envoyer
-							</button>
-						</div>
-					</form>
+								>
+									Envoyer
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -299,7 +380,7 @@
 		role="button"
 		tabindex="0"
 		aria-label="Fermer le modal"
-		onclick={() => defaultModal = false}
+		onclick={() => (defaultModal = false)}
 		onkeydown={handleBackdropKeydown}
 	>
 		<div
@@ -312,17 +393,31 @@
 			onkeydown={handleBackdropKeydown}
 		>
 			<!-- Modal header -->
-			<div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+			<div
+				class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+			>
 				<h3 id="modal-title" class="text-xl font-semibold text-gray-900 dark:text-white">
 					Formulaire soumis
 				</h3>
 				<button
 					type="button"
 					class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-					onclick={() => defaultModal = false}
+					onclick={() => (defaultModal = false)}
 				>
-					<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+					<svg
+						class="w-3 h-3"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 14 14"
+					>
+						<path
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+						/>
 					</svg>
 					<span class="sr-only">Close modal</span>
 				</button>
@@ -337,11 +432,13 @@
 				</p>
 			</div>
 			<!-- Modal footer -->
-			<div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+			<div
+				class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+			>
 				<button
 					type="button"
 					class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-					onclick={() => defaultModal = false}
+					onclick={() => (defaultModal = false)}
 				>
 					Retour
 				</button>
