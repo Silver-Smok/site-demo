@@ -10,12 +10,27 @@ import { PRIVATE_DOMAIN_NAME } from '$env/static/private';
 const mailgun = new Mailgun(formData);
 const client = mailgun.client({ username: 'api', key: PRIVATE_MAILGUN_KEY });
 const newContactSchema = z.object({
-	name: z
+	nom: z
 		.string()
-		.min(1, { message: ' Veuillez renseigner un nom' })
+		.min(1, { message: 'Veuillez renseigner un nom' })
 		.max(100)
 		.trim()
-		.regex(new RegExp("^[A-Za-z]+(?:[ -'][A-Za-z]+)*$")),
+		.regex(new RegExp("^[A-Za-zÀ-ÿ]+(?:[ -'][A-Za-zÀ-ÿ]+)*$"), { message: 'Nom invalide' }),
+	prenom: z
+		.string()
+		.min(1, { message: 'Veuillez renseigner un prénom' })
+		.max(100)
+		.trim()
+		.regex(new RegExp("^[A-Za-zÀ-ÿ]+(?:[ -'][A-Za-zÀ-ÿ]+)*$"), { message: 'Prénom invalide' }),
+	entiteJuridique: z
+		.string()
+		.min(1, { message: 'Veuillez renseigner une entité juridique' })
+		.max(200)
+		.trim(),
+	nombreBoutiques: z
+		.string()
+		.min(1, { message: 'Veuillez renseigner un nombre de boutiques' })
+		.regex(/^\d+$/, { message: 'Veuillez renseigner un nombre valide' }),
 	email: z
 		.string()
 		.min(1, { message: ' Veuillez rentrer une adresse email' })
@@ -50,14 +65,26 @@ export const actions = {
 			to: 'contact@silver-stock.fr',
 			subject: 'Application Contact',
 			text:
-				"Nom de L'expéditeur  : " +
-				form.data.name +
+				'Nom : ' +
+				form.data.nom +
 				'\n' +
-				'Message : ' +
-				form.data.message +
+				'Prénom : ' +
+				form.data.prenom +
+				'\n' +
+				'Email : ' +
+				form.data.email +
+				'\n' +
+				'Entité juridique : ' +
+				form.data.entiteJuridique +
+				'\n' +
+				'Nombre de boutiques : ' +
+				form.data.nombreBoutiques +
 				'\n' +
 				'Numéro de téléphone : ' +
-				form.data.phone
+				form.data.phone +
+				'\n' +
+				'Message : ' +
+				form.data.message
 		};
 
 		if (!form.valid) {
