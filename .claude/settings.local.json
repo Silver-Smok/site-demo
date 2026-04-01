@@ -4,7 +4,8 @@
       "Bash(taskkill //F //PID 14104)",
       "Bash(npm view:*)",
       "Bash(npm ls:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(mkdir:*)"
     ]
   },
   "enableAllProjectMcpServers": true,
